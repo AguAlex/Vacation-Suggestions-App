@@ -47,4 +47,5 @@ group :development, :test do
 end
 
 gem 'rack-cors'
+gem 'jbuilder'  # pentru a crea răspunsuri JSON
 
