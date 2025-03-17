@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: postgresql://neondb_owner:npg_StYVO2uKad6Q@ep-bold-thunder-a2v1armx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
