@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3001')
-      .then(response => response.json())
-      .then(data => setPosts(data));
+    fetch('http://localhost:3000/test/index')  // URL-ul backend-ului Rails
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Mesaj din API:', data);
+        setMessage(data.message);  // Setezi mesajul în state
+      })
+      .catch((error) => {
+        console.error('Eroare la fetch:', error);
+      });
   }, []);
 
   return (
-    <div>
-      <h1>Miaaaaau miaaau</h1>
-      
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1>Test React + Rails API</h1>
+      <p>{message}</p>
     </div>
   );
 }
