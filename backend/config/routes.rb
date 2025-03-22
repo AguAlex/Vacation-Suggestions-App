@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :cities
   resources :countries
   resources :users
-  get "up" => "rails/health#show", as: :rails_health_check
-  get 'test/index', to: 'test#index'
+
+  post '/users/signup', to: 'users#signup'
+  post '/users/login', to: 'users#login'
 end

@@ -43,6 +43,27 @@ class UsersController < ApplicationController
     head :no_content # Indică succesul fără a returna niciun conținut
   end
 
+  # POST /users/login
+  def login
+    @user = User.find_by(email: params[:email])
+
+    if @user&.authenticate(params[:password])
+      render json: { message: 'Autentificare reușită', user: @user }, status: :ok
+    else
+      render json: { message: 'Email sau parolă greșită' }, status: :unauthorized
+    end
+  end
+
+  def signup
+    @user = User.new(user_params)
+
+    if @user.save
+      render json: { message: 'Cont creat cu succes!', user: @user }, status: :created
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
