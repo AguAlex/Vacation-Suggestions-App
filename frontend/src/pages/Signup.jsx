@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './SignUp.css';
+
+const Signup = () => {
+  const [nume, setNume] = useState("");     // numele userului
+  const [email, setEmail] = useState("");   // emailul userului
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    // Structurăm datele de signup
+    const signupData = {
+      email, // email-ul
+      password,// parola
+      nume,// numele utilizatorului
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: signupData }),  // Trimite corect structura cu 'user'
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Signup successful:', data);
+        // Poți redirecționa utilizatorul către pagina de login
+        navigate('/login');
+      } else {
+        console.log('Signup failed:', data.errors);  // Afișează erorile corect
+        alert('Signup failed: ' + data.errors.join(', '));
+      }
+    } catch (error) {
+      console.error('Error sending the request:', error);
+      alert('Error sending the request');
+    }
+  };
+
+  return (
+    <div className="signup-container">
+      <h2>Create an Account</h2>
+      <form onSubmit={handleSignup} className="signup-form">
+        <input 
+          type="text" 
+          placeholder="Name" 
+          value={nume} // Setăm valoarea cu starea 'nume'
+          onChange={(e) => setNume(e.target.value)} // Actualizăm starea pentru 'nume'
+          required 
+        />
+        <input 
+          type="email" 
+          placeholder="Email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+          required 
+        />
+        <input 
+          type="password" 
+          placeholder="Password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          required 
+        />
+        <button type="submit">Sign Up</button>
+        <p>
+          Already have an account?{' '}
+          <span className="link" onClick={() => navigate('/login')}>Login</span>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Signup;
