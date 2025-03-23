@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :cities
   resources :countries
   resources :users
-  get "up" => "rails/health#show", as: :rails_health_check
-  get 'test/index', to: 'test#index'
+
+  
+  # post '/users/login', to: 'users#login'
+  post '/login', to: 'sessions#create'
+  post 'sessions', to: 'sessions#create'   # Ruta pentru login
+  delete 'sessions', to: 'sessions#destroy' # Ruta pentru logout (opțional pentru JWT)
 end
