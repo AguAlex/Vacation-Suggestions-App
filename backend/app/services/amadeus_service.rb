@@ -17,6 +17,37 @@ class AmadeusService
     response.parsed_response["access_token"]
   end
 
+
+  def self.get_cities(keyword, access_token)
+    url = "https://test.api.amadeus.com/v1/reference-data/locations"
+
+    response = HTTParty.get(url, query: {
+      subType: "CITY",
+      keyword: keyword
+    }, headers: {
+      "Authorization" => "Bearer #{access_token}"
+    })
+
+    begin
+      parsed_response = JSON.parse(response.body)
+
+      # Verificăm dacă răspunsul conține cheia "data" și returnăm doar "data"
+      if parsed_response.is_a?(Hash) && parsed_response.key?("data")
+        parsed_response["data"]
+      else
+        # Dacă nu există cheia "data", returnăm un array gol
+        []
+      end
+    rescue JSON::ParserError => e
+      # În cazul în care apare o eroare la parsing, returnăm un array gol
+      []
+    rescue TypeError, NoMethodError => e
+      # În cazul în care apar erori de tip sau acces la metode inexistent, returnăm un array gol
+      []
+    end
+  end
+
+
   def self.get_activities(latitude, longitude, radius, access_token)
     url = "https://test.api.amadeus.com/v1/shopping/activities"
 
@@ -28,19 +59,29 @@ class AmadeusService
       "Authorization" => "Bearer #{access_token}"
     })
 
-    # Loghează răspunsul API-ului pentru debugging
-    # Rails.logger.info "Amadeus API Raw Response: #{response.body.inspect}"
+    # Verifică dacă răspunsul este un succes
+    if response.success?
+      # Încearcă să parsezi răspunsul JSON
+      begin
+        parsed_response = JSON.parse(response.body)
 
-    # Asigură-te că răspunsul este JSON valid
-    begin
-      parsed_response = JSON.parse(response.body)
-      # Rails.logger.info "Parsed Response: #{parsed_response.inspect}"
-      parsed_response
-    rescue JSON::ParserError => e
-      Rails.logger.error "JSON Parsing Error: #{e.message} - "
-      {} # Returnează un hash gol pentru a evita crash-uri
+        # Verifică dacă "data" există în răspunsul JSON
+        if parsed_response.is_a?(Hash) && parsed_response.key?("data")
+          parsed_response["data"]  # Returnează datele din API
+        else
+          # Rails.logger.error "Unexpected API response structure: #{parsed_response.inspect}"
+          []  # Returnează un array gol dacă nu există "data"
+        end
+      rescue JSON::ParserError => e
+        Rails.logger.error "JSON Parsing Error: #{e.message} - Response Body: "
+        []  # Returnează un array gol în caz de eroare la parse
+      end
+    else
+      Rails.logger.error "API Request failed with status: #{response.code} - "
+      []  # Returnează un array gol în caz de eroare de rețea sau API
     end
   end
+
 
   def self.get_hotel_details(hotel_id, access_token)
     url = "https://test.api.amadeus.com/v3/shopping/hotel-offers"
@@ -66,7 +107,7 @@ class AmadeusService
     })
 
     # Log pentru debugging
-    Rails.logger.info("Raw API Response: #{response.body}")
+    # Rails.logger.info("Raw API Response: #{response.body}")
 
     begin
       parsed_response = JSON.parse(response.body)
@@ -75,14 +116,14 @@ class AmadeusService
       if parsed_response.is_a?(Hash) && parsed_response.key?("data")
         parsed_response["data"]
       else
-        Rails.logger.error("Unexpected API response format: #{parsed_response.inspect}")
+        # Rails.logger.error("Unexpected API response format: #{parsed_response.inspect}")
         []
       end
     rescue JSON::ParserError => e
-      Rails.logger.error("JSON Parse Error: #{e.message} - Response: #{response.body}")
+      # Rails.logger.error("JSON Parse Error: #{e.message} - Response: #{response.body}")
       []
     rescue TypeError, NoMethodError => e
-      Rails.logger.error("Type Error: #{e.message} - Parsed Response: #{parsed_response.inspect}")
+      # Rails.logger.error("Type Error: #{e.message} - Parsed Response: #{parsed_response.inspect}")
       []
     end
   end
