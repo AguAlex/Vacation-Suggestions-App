@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :countries
   resources :users
 
-  post '/users/signup', to: 'users#signup'
-  post '/users/login', to: 'users#login'
+  
+  # post '/users/login', to: 'users#login'
+  post '/login', to: 'sessions#create'
+  post 'sessions', to: 'sessions#create'   # Ruta pentru login
+  delete 'sessions', to: 'sessions#destroy' # Ruta pentru logout (opțional pentru JWT)
 end

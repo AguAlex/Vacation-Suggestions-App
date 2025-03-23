@@ -20,9 +20,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      render json: { message: 'User created successfully', user: @user }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      puts @user.errors.full_messages
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -46,23 +47,14 @@ class UsersController < ApplicationController
   # POST /users/login
   def login
     @user = User.find_by(email: params[:email])
-
-    if @user&.authenticate(params[:password])
+  
+    if @user&.authenticate(params[:parola]) # folosește 'parola' aici, pentru a se potrivi cu câmpul din DB
       render json: { message: 'Autentificare reușită', user: @user }, status: :ok
     else
       render json: { message: 'Email sau parolă greșită' }, status: :unauthorized
     end
   end
-
-  def signup
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: { message: 'Cont creat cu succes!', user: @user }, status: :created
-    else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -72,6 +64,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:nume, :parola, :email)
+      params.require(:user).permit(:nume, :password, :email)
     end
 end

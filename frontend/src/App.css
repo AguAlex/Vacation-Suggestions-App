@@ -7,6 +7,15 @@
   pointer-events: none;
 }
 
+.app-container {
+  font-family: Arial, sans-serif;
+}
+
+.page-content {
+  padding: 20px;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
