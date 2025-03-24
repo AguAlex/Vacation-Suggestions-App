@@ -96,3 +96,25 @@
     text-align: left;
   }
 }
+
+.search-container {
+  margin-top: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search-container input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+

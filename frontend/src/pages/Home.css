@@ -24,8 +24,8 @@
   gap: 20px;
   margin-top: 30px;
   opacity: 0;
-  animation: fadeIn 1s forwards; /* Adăugăm o animație de fade-in pentru întreaga secțiune */
-  animation-delay: 0.5s; /* Întârziere pentru a permite altor elemente să se afișeze */
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
 }
 
 .country-card {
@@ -35,10 +35,9 @@
   width: 250px;
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease;
-  transform: translateY(20px);
   opacity: 0;
   animation: fadeInUp 0.5s forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Tranformați și box-shadow pe hover */
 }
 
 @keyframes fadeIn {
@@ -50,12 +49,13 @@
 @keyframes fadeInUp {
   to {
     opacity: 1;
-    transform: translateY(0); /* Mișcă elementele în sus */
+    transform: translateY(0); /* Mișcă cardul în sus pe măsură ce devine vizibil */
   }
 }
 
 .country-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.05); /* Mărește cardul pe hover */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Adăugăm umbra mai mare pentru hover */
 }
 
 .country-card h3 {
