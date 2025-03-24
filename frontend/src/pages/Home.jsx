@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import country1Img from "../assets/us.jpg";
+import ChatBot from "../components/Chatbot";
 
 function Home({ user, setUser }) {
   const navigate = useNavigate();
@@ -57,12 +58,13 @@ function Home({ user, setUser }) {
       )}
 
       <h2>Top Countries</h2>
+
       <div className="countries-container">
         {countries.length > 0 ? (
           countries.map((country) => (
             <div className="country-card" key={country.id}>
               <h3>{country.name}</h3>
-              {/* Dacă ai poze sau descriere, le pui aici */}
+              
               <img src={country1Img} alt="Country 1" />
               
             </div>
@@ -71,6 +73,9 @@ function Home({ user, setUser }) {
           <p>Loading countries...</p>
         )}
       </div>
+      
+      <h2>Chat with our Bot</h2>
+      <ChatBot /> {/* Adaugă componenta ChatBot aici */}
     </div>
   );
 }
