@@ -2,47 +2,45 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from '../components/Header';
 
-function Home() {
-  const [user, setUser] = useState(null);
+function Home({ user, setUser }) {
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
   
-    if (!token) {
-      navigate("/login"); // Redirecționează utilizatorul la login dacă nu există token
-    } else if (storedUser) {
+    if (token && storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        console.log(parsedUser); // Verifică ce date sunt în storedUser
-        setUser(parsedUser); // Setează utilizatorul dacă este valid
+        setUser(parsedUser);
       } catch (error) {
         console.error("Error parsing user data from localStorage:", error);
-        navigate("/login"); // Dacă nu reușește să parseze datele, trimite la login
+        // Poți lăsa user-ul null dacă parsing-ul e invalid
+        setUser(null);
       }
     } else {
-      navigate("/login"); // Dacă nu există utilizator stocat, trimite la login
+      // Nu există token sau user, îl lași pe user null.
+      setUser(null);
     }
-  }, [navigate]);
+  }, [setUser]);
   
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   navigate("/login");
+  // };
 
   return (
     <div>
-        <Header />
+        
         {user ? (
             <div>
               <h1>Hello, {user.nume}!</h1> 
-              <button onClick={handleLogout}>Logout</button>
+              
             </div>
         ) : (
-            <h1>Loading...</h1>
+            <h1>Hello! You can sign up.</h1>
         )}
     </div>
   );
