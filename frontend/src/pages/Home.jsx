@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from '../components/Header';
+import "./Home.css";
 
 function Home({ user, setUser }) {
   const navigate = useNavigate();
@@ -32,16 +32,18 @@ function Home({ user, setUser }) {
   // };
 
   return (
-    <div>
-        
-        {user ? (
-            <div>
-              <h1>Hello, {user.nume}!</h1> 
-              
-            </div>
-        ) : (
-            <h1>Hello! You can sign up.</h1>
-        )}
+    <div className="home-container">
+      {user ? (
+        <div>
+          <h1>Hello, {user.nume}!</h1>
+          <p>Welcome back to Vacation Suggestion App!</p>
+          
+        </div>
+      ) : (
+        <div>
+          <h1>Hello! You can sign up.</h1>
+        </div>
+      )}
     </div>
   );
 }
