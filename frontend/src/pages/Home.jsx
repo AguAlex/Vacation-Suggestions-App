@@ -1,49 +1,81 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from '../components/Header';
+import "./Home.css";
+import country1Img from "../assets/us.jpg";
+import ChatBot from "../components/Chatbot";
 
-function Home() {
-  const [user, setUser] = useState(null);
+function Home({ user, setUser }) {
   const navigate = useNavigate();
-
+  const [countries, setCountries] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
   
-    if (!token) {
-      navigate("/login"); // Redirecționează utilizatorul la login dacă nu există token
-    } else if (storedUser) {
+    if (token && storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        console.log(parsedUser); // Verifică ce date sunt în storedUser
-        setUser(parsedUser); // Setează utilizatorul dacă este valid
+        setUser(parsedUser);
       } catch (error) {
         console.error("Error parsing user data from localStorage:", error);
-        navigate("/login"); // Dacă nu reușește să parseze datele, trimite la login
+        // Poți lăsa user-ul null dacă parsing-ul e invalid
+        setUser(null);
       }
     } else {
-      navigate("/login"); // Dacă nu există utilizator stocat, trimite la login
+      // Nu există token sau user, îl lași pe user null.
+      setUser(null);
     }
-  }, [navigate]);
+  }, [setUser]);
   
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/countries");
+        if (!response.ok) throw new Error("Failed to fetch countries");
+        const data = await response.json();
+        console.log(data);
+        setCountries(data.slice(0, 3));
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
 
   return (
-    <div>
-        <Header />
-        {user ? (
-            <div>
-              <h1>Hello, {user.nume}!</h1> 
-              <button onClick={handleLogout}>Logout</button>
+    <div className="home-container">
+      {user ? (
+        <div>
+          <h1>Hello, {user.nume}!</h1>
+          <p>Welcome back to Vacation Suggestion App!</p>
+          
+        </div>
+      ) : (
+        <div>
+          <h1>Hello! You can sign up.</h1>
+        </div>
+      )}
+
+      <h2>Top Countries</h2>
+
+      <div className="countries-container">
+        {countries.length > 0 ? (
+          countries.map((country) => (
+            <div className="country-card" key={country.id}>
+              <h3>{country.name}</h3>
+              
+              <img src={country1Img} alt="Country 1" />
+              
             </div>
+          ))
         ) : (
-            <h1>Loading...</h1>
+          <p>Loading countries...</p>
         )}
+      </div>
+      
+      <h2>Chat with our Bot</h2>
+      <ChatBot /> {/* Adaugă componenta ChatBot aici */}
     </div>
   );
 }

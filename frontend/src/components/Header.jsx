@@ -2,9 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-function Header() {
-
-    const [user, setUser] = useState(null);
+function Header({ user, setUser }) {
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -23,6 +21,7 @@ function Header() {
         <header className="header">
         <div className="logo">Vaccation Suggestion App</div>
         <nav className="nav-links">
+            <li><Link to="/home">Home</Link></li>
             {!user ? (
                 <>
                 <li><Link to="/login">Login</Link></li>
