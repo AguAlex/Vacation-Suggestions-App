@@ -1,9 +1,10 @@
 import React, { useState} from "react";
-import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import Vacation from "./pages/Vacation";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/home" element={<Home user={user} setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/vacation" element={<Vacation />} />
       </Routes>
 
   

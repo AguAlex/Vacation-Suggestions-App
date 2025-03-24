@@ -73,9 +73,10 @@ function Home({ user, setUser }) {
           <p>Loading countries...</p>
         )}
       </div>
-      
+      <br/>
+      <br/>
       <h2>Chat with our Bot</h2>
-      <ChatBot /> {/* Adaugă componenta ChatBot aici */}
+      <ChatBot />
     </div>
   );
 }
