@@ -50,3 +50,5 @@ end
 
 gem "rack-cors"
 gem "jbuilder"  # pentru a crea răspunsuri JSON
+
+gem "dotenv", "~> 3.1"
