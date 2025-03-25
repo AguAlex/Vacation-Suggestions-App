@@ -1,10 +1,12 @@
 # app/services/amadeus_service.rb
 
 require "httparty"
+require "dotenv/load"
+
 
 class AmadeusService
-  API_KEY = "ZDp910zHnp4aiOWDyV19L8UNmJHUORCt"
-  API_SECRET = "V1Sl0ogXERAnNDrv"
+  API_KEY = ENV["API_KEY"]
+  API_SECRET = ENV["API_SECRET"]
 
   def self.get_access_token
     url = "https://test.api.amadeus.com/v1/security/oauth2/token"
@@ -19,11 +21,12 @@ class AmadeusService
 
 
   def self.get_cities(keyword, access_token)
-    url = "https://test.api.amadeus.com/v1/reference-data/locations"
+    url = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
 
     response = HTTParty.get(url, query: {
-      subType: "CITY",
-      keyword: keyword
+      keyword: keyword,
+      max: 10,           # Limit the number of results
+      include: "AIRPORTS" # Include airports in the response
     }, headers: {
       "Authorization" => "Bearer #{access_token}"
     })
@@ -40,12 +43,41 @@ class AmadeusService
       end
     rescue JSON::ParserError => e
       # În cazul în care apare o eroare la parsing, returnăm un array gol
+      Rails.logger.error "JSON Parse Error: #{e.message}"
       []
     rescue TypeError, NoMethodError => e
       # În cazul în care apar erori de tip sau acces la metode inexistent, returnăm un array gol
+      Rails.logger.error "Error: #{e.message}"
       []
     end
   end
+
+  def self.get_country_name_by_code(country_code)
+    url = "https://restcountries.com/v3.1/alpha/#{country_code}"
+
+    response = HTTParty.get(url)
+
+    begin
+      # Verificăm dacă răspunsul este OK
+      if response.code == 200
+        country_data = response.parsed_response
+        country_name = country_data[0]["name"]["common"]
+        country_name
+      else
+        Rails.logger.error "Error: Unable to retrieve country data"
+        nil
+      end
+    rescue HTTParty::Error => e
+      # În caz de eroare HTTP
+      Rails.logger.error "HTTP Error: #{e.message}"
+      nil
+    rescue StandardError => e
+      # În caz de eroare generală
+      Rails.logger.error "Error: #{e.message}"
+      nil
+    end
+  end
+
 
 
   def self.get_activities(latitude, longitude, radius, access_token)
