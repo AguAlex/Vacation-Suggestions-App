@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
+import Header from "./components/Header";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Home from "./pages/Home";
+import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('http://localhost:3000/test/index')  // URL-ul backend-ului Rails
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Mesaj din API:', data);
-        setMessage(data.message);  // Setezi mesajul în state
-      })
-      .catch((error) => {
-        console.error('Eroare la fetch:', error);
-      });
-  }, []);
-
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Test React + Rails API</h1>
-      <p>{message}</p>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+    </Routes>
+    </Router>
   );
 }
 

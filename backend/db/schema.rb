@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_160623) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_23_124223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -53,6 +53,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_160623) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "playing_with_neon", id: :serial, force: :cascade do |t|
+    t.text "name", null: false
+    t.float "value", limit: 24
+  end
+
   create_table "points_of_interests", force: :cascade do |t|
     t.string "name"
     t.float "rating"
@@ -69,10 +74,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_160623) do
 
   create_table "users", force: :cascade do |t|
     t.string "nume"
-    t.string "parola"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "accomodations", "cities"

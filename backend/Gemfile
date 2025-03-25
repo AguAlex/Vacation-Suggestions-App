@@ -48,7 +48,9 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
+
 gem "rack-cors"
 gem "jbuilder"  # pentru a crea răspunsuri JSON
-
+gem "jwt"
+gem "bcrypt", "~> 3.1.7"
 gem "dotenv", "~> 3.1"
