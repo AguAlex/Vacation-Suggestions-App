@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import './Home';
+import image from '../assets/travel.png';
 
 const Login = () => {
   const [email, setEmail] = useState(""); 
@@ -51,32 +52,37 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Welcome Back</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        <button type="submit">Login</button>
+    <div className="container" style={{ backgroundColor: 'rgb(247, 228, 233)', minHeight: '100vh' }}>
+      <div className="login-container" >
+        <h2>Welcome Back</h2>
+        <form onSubmit={handleLogin} className="login-form">
+          <input 
+            type="email" 
+            placeholder="Email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+          />
+          <button type="submit">Login</button>
 
-        {errorMessage && <div className="error-message">{errorMessage}</div>} 
+          {errorMessage && <div className="error-message">{errorMessage}</div>} 
 
-        <p>
-          Don't have an account?{' '}
-          <span className="link" onClick={() => navigate('/signup')}>Sign up</span>
-        </p>
-      </form>
+          <p>
+            Don't have an account?{' '}
+            <span className="link" onClick={() => navigate('/signup')}>Sign up</span>
+          </p>
+        </form>
+      </div>
+
+      <img className="login-image" src={image} alt="Image" />
+      
     </div>
   );
 };

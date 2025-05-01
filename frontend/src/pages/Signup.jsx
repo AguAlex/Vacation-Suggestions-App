@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
+import image from '../assets/travel2.png';
 
 const Signup = () => {
   const [nume, setNume] = useState("");     // numele userului
@@ -44,36 +45,41 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Create an Account</h2>
-      <form onSubmit={handleSignup} className="signup-form">
-        <input 
-          type="text" 
-          placeholder="Name" 
-          value={nume} // Setăm valoarea cu starea 'nume'
-          onChange={(e) => setNume(e.target.value)} // Actualizăm starea pentru 'nume'
-          required 
-        />
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        <button type="submit">Sign Up</button>
-        <p>
-          Already have an account?{' '}
-          <span className="link" onClick={() => navigate('/login')}>Login</span>
-        </p>
-      </form>
+    <div className="container" style={{ backgroundColor: 'rgb(247, 228, 233)'}}>
+      <img className="signup-image" src={image} alt="Image" />
+
+      <div className="signup-container">
+        <h2>Create an Account</h2>
+        <form onSubmit={handleSignup} className="signup-form">
+          <input 
+            type="text" 
+            placeholder="Name" 
+            value={nume} // Setăm valoarea cu starea 'nume'
+            onChange={(e) => setNume(e.target.value)} // Actualizăm starea pentru 'nume'
+            required 
+          />
+          <input 
+            type="email" 
+            placeholder="Email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+          />
+          <button type="submit">Sign Up</button>
+          <p>
+            Already have an account?{' '}
+            <span className="link" onClick={() => navigate('/login')}>Login</span>
+          </p>
+        </form>
+      </div>
+
     </div>
   );
 };
