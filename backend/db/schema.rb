@@ -8,9 +8,9 @@
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
-# It's strongly recommended that you check this file into your version control system.
+# It's strongly recommended that you check this file into your version control syst
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_203318) do
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_02_202809) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -70,20 +70,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_202809) do
     t.string "image"
     t.float "price"
     t.string "description"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["city_id"], name: "index_points_of_interests_on_city_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "nume"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "password_digest"
-  end
-
-  add_foreign_key "accomodations", "cities"
-  add_foreign_key "accomodations_users", "accomodations"
-  add_foreign_key "accomodations_users", "users"
-  add_foreign_key "cities", "countries"
-  add_foreign_key "points_of_interests", "cities"
-end

@@ -81,7 +81,9 @@ class PopulateDatabaseJob < ApplicationJob
           price: activity["price"]&.dig("amount")&.to_f || 0.0, # Evită nil errors
           rating: activity["rating"]&.to_f || 0.0, # Evită nil errors
           link: activity["bookingLink"] || activity["self"]["href"], # Fallback la `self["href"]`
-          image: (activity["pictures"] || []).join(", ") # Evită nil errors
+          image: (activity["pictures"] || []).join(", "), # Evită nil errors
+          latitude:latitude,
+          longitude:longitude
         )
         end
         hotels = AmadeusService.get_hotels(first_city["iataCode"], access_token)
@@ -102,7 +104,7 @@ class PopulateDatabaseJob < ApplicationJob
 
 
       # Procesare fiecare hotel
-      (hotels).take(3).each do |hotel|
+      (hotels).take(5).each do |hotel|
         Rails.logger.info("hotel")
         Rails.logger.info(hotel.inspect)
         # Asigură-te că datele sunt disponibile și valide

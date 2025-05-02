@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SOM Visualization</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    circle { fill: steelblue; stroke: black; stroke-width: 1px; }
+    text { font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>City SOM</h1>
+  <svg width="600" height="600"></svg>
+
+  <script>
+    fetch("/som_data")
+      .then(res => res.json())
+      .then(data => {
+        const svg = d3.select("svg");
+        const gridSize = 50;
+
+        svg.selectAll("circle")
+          .data(data)
+          .enter()
+          .append("circle")
+          .attr("cx", d => d.x * gridSize + 25)
+          .attr("cy", d => d.y * gridSize + 25)
+          .attr("r", 10);
+
+        svg.selectAll("text")
+          .data(data)
+          .enter()
+          .append("text")
+          .attr("x", d => d.x * gridSize + 35)
+          .attr("y", d => d.y * gridSize + 30)
+          .text(d => d.city);
+      });
+  </script>
+</body>
+</html>

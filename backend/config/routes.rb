@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :countries, only: [:index, :show]
   resources :users
 
-  
   # post '/users/login', to: 'users#login'
   post '/login', to: 'sessions#create'
   post 'sessions', to: 'sessions#create'   # Ruta pentru login
