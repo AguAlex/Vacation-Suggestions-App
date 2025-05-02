@@ -51,6 +51,10 @@ const Hotels = () => {
             <h4>{acc.name}</h4>
             <p>Price: {acc.price}</p>
             <p>Rating: {acc.rating}</p>
+            <p>City: {acc.city_name}</p>
+            <button onClick={() => toggleFavorite(accommodation.id)}>
+              {isFavorited ? "★ Favorit" : "☆ Adaugă la favorite"}
+            </button>
           </div>
         ))}
       </div>
