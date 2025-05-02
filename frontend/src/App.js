@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Vacation from "./pages/Vacation";
 import "./App.css";
+import Hotels from "./pages/Hotels";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/vacation" element={<Vacation />} />
+        <Route path="/hotels/:id" element={<Hotels/>} />
       </Routes>
 
   

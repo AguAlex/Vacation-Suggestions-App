@@ -43,7 +43,7 @@ function Home({ user, setUser }) {
     fetchCountries();
   }, []);
 
-  // Schimbă slide-ul la fiecare 3 secunde
+  // Schimba slide-ul la fiecare 3 secunde
   useEffect(() => {
     const interval = setInterval(() => {
       setSlideIndex((prevIndex) => (prevIndex + 1) % countries.length);
