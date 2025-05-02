@@ -30,9 +30,7 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Login successful:', data);
-
-        // Salvează token-ul în localStorage
+      
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -41,7 +39,7 @@ const Login = () => {
  
         navigate('/home');  
       } else {
-        // Dacă răspunsul nu este OK, se verifică dacă există un mesaj și se afișează
+        
         console.log('Login failed:', data.message || 'Unknown error');
         setErrorMessage(data.message || 'Unknown error');
       }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import "./Vacation.css";
 
 function Vacation() {
@@ -46,10 +47,10 @@ function Vacation() {
       <div className="countries-container">
         {filteredCountries.length > 0 ? (
           filteredCountries.map((country) => (
-            <div className="country-card" key={country.id}>
+            <Link to={`/hotels/${country.id}`} className="country-card">
               <h3>{country.name}</h3>
-              <img src={country.imageUrl} alt={country.name} />
-            </div>
+              <img src={country.image} alt={country.name} />
+            </Link>
           ))
         ) : (
           <p>No countries found...</p>

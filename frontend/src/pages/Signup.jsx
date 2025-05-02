@@ -25,17 +25,15 @@ const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user: signupData }),  // Trimite corect structura cu 'user'
+        body: JSON.stringify({ user: signupData }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         console.log('Signup successful:', data);
-        // Poți redirecționa utilizatorul către pagina de login
         navigate('/login');
       } else {
-        console.log('Signup failed:', data.errors);  // Afișează erorile corect
         alert('Signup failed: ' + data.errors.join(', '));
       }
     } catch (error) {
@@ -54,8 +52,8 @@ const Signup = () => {
           <input 
             type="text" 
             placeholder="Name" 
-            value={nume} // Setăm valoarea cu starea 'nume'
-            onChange={(e) => setNume(e.target.value)} // Actualizăm starea pentru 'nume'
+            value={nume}
+            onChange={(e) => setNume(e.target.value)}
             required 
           />
           <input 
