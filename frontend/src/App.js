@@ -7,7 +7,11 @@ import Home from "./pages/Home";
 import Vacation from "./pages/Vacation";
 import SOMMap from "./pages/SOM";
 import "./App.css";
+<<<<<<< HEAD
 import PointsOfInterest from "./pages/Points_of_interests";
+=======
+import Hotels from "./pages/Hotels";
+>>>>>>> main
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -24,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/vacation" element={<Vacation />} />
+        <Route path="/hotels/:id" element={<Hotels/>} />
       </Routes>
     </Router>
   );
