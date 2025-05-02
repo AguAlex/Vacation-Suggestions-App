@@ -10,7 +10,6 @@ import "./App.css";
 
 import Hotels from "./pages/Hotels";
 
-
 function App() {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
@@ -26,7 +25,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/vacation" element={<Vacation />} />
-        <Route path="/hotels/:id" element={<Hotels/>} />
+        <Route path="/hotels/:id" element={<Hotels />} />
       </Routes>
     </Router>
   );
