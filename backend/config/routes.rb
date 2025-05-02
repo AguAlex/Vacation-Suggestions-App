@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :accomodations
   resources :points_of_interests
   resources :cities
-  resources :countries
+  resources :countries, only: [:index, :show]
   resources :users
 
   # post '/users/login', to: 'users#login'

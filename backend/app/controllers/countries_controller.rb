@@ -11,7 +11,15 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
-    render json: @country, status: :ok
+    country = Country.includes(:cities).find(params[:id])
+    accomodations = country.cities.flat_map(&:accomodations)
+
+    render json: {
+      id: country.id,
+      name: country.name,
+      cities: country.cities.as_json(only: [:id, :name]),
+      accomodations: accomodations.as_json(only: [:id, :name, :city_id, :price, :rating])
+    }
   end
 
   # POST /countries
