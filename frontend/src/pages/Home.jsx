@@ -10,6 +10,7 @@ function Home({ user, setUser }) {
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [topAccomodations, setTopAccomodations] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,6 +44,22 @@ function Home({ user, setUser }) {
     fetchCountries();
   }, []);
 
+  // Fetch top 3 hotels after initial load
+  useEffect(() => {
+    const fetchTopAccomodations = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/top_accomodations");
+        const data = await response.json();
+        console.log(data);
+        setTopAccomodations(data);
+      } catch (error) {
+        console.error("Error fetching top hotels:", error);
+      }
+    };
+
+    fetchTopAccomodations();
+  }, []);
+
   // Schimba slide-ul la fiecare 3 secunde
   useEffect(() => {
     const interval = setInterval(() => {
@@ -67,18 +84,12 @@ function Home({ user, setUser }) {
               className={`mySlides ${index === slideIndex ? "active" : ""}`}
             >
               <img src={images[index]} alt={country.name} />
-              <div className="img-text">
-                <h3>{country.name}</h3>
-                <div></div>
-              </div>
-              
             </div>
           ))
         ) : (
           <p>Loading countries...</p>
         )}
       </div>
-
 
       <div style={{ textAlign: "center" }}>
         {countries.map((_, index) => (
@@ -101,6 +112,28 @@ function Home({ user, setUser }) {
           <h1>Hello! You can sign up.</h1>
         </div>
       )}
+      <br />
+
+      {/* Top 3 Hotels Section */}
+      <div className="top-hotels-section">
+        <h2>Top 3 Hotels Based on Likes</h2>
+        <div className="top-accomodations">
+          {topAccomodations.length > 0 ? (
+            topAccomodations.map((acc) => (
+              <div key={acc.id} className="accomodation-card">
+                <h4>{acc.name}</h4>
+                <p>Price: {acc.price}</p>
+                <p>Rating: {acc.rating}</p>
+                <p>{acc.country_name}, {acc.city_name}</p>
+                <p>Total Likes: {acc.likes_count}</p>
+              </div>
+            ))
+          ) : (
+            <p>Loading top hotels...</p>
+          )}
+        </div>
+      </div>
+
       <br />
       <ChatBot />
     </div>
