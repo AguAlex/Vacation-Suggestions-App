@@ -109,3 +109,41 @@ html, body {
     pointer-events: none;
 }
 
+.top-hotels-section {
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.top-hotels-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.top-accomodations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.accomodation-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accomodation-card h4 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.accomodation-card p {
+  margin: 5px 0;
+}
+
+.accomodation-card p:nth-child(1) {
+  font-weight: bold;
+}

@@ -43,6 +43,18 @@ class AccomodationsController < ApplicationController
     head :no_content  # Indică succesul fără a returna niciun conținut
   end
 
+  # GET /top_accomodations
+  def top_accomodations
+    top_accommodations = Accomodation.joins(city: :country)
+                                    .select('accomodations.id, accomodations.name, accomodations.price, accomodations.rating, cities.name AS city_name, countries.name AS country_name, COUNT(likes.id) AS likes_count')
+                                    .left_joins(:likes)
+                                    .group('accomodations.id, cities.id, countries.id')
+                                    .order('likes_count DESC')
+                                    .limit(3)
+  
+    render json: top_accommodations
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_accomodation
