@@ -149,12 +149,37 @@ html, body {
 }
 
 .not-logged-message {
-  background-color: #ffe4e1;
-  border: 1px solid #ff7f7f;
-  padding: 20px;
+  background-color: #f0f8ff;
+  border: 2px solid #00bfff;
+  padding: 25px;
   margin: 20px auto;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 80%;
   text-align: center;
   color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.not-logged-message h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.not-logged-message ul {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.not-logged-message li {
+  margin-bottom: 10px;
+}
+
+.not-logged-message p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 15px;
 }
