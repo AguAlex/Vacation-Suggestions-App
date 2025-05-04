@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Hotels.css';
+import LikeButton from '../components/LikeButton';
 
 const Hotels = () => {
   const { id } = useParams();
@@ -32,6 +33,12 @@ const Hotels = () => {
     return <div className="hotels-loading">Se încarcă...</div>;
   }
 
+  const getUserIdFromLocalStorage = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user?.id;
+  };
+
+
   return (
     <div className="hotels-container">
       <h2 className="section-title">Cities from {countryName}</h2>
@@ -46,17 +53,16 @@ const Hotels = () => {
       <h3 className="section-title">Available hotels</h3>
       <br/>
       <div className="accomodation-grid">
-        {accomodations.map((acc) => (
-          <div key={acc.id} className="accomodation-card">
-            <h4>{acc.name}</h4>
-            <p>Price: {acc.price}</p>
-            <p>Rating: {acc.rating}</p>
-            <p>City: {acc.city_name}</p>
-            <button onClick={() => toggleFavorite(accommodation.id)}>
-              {isFavorited ? "★ Favorit" : "☆ Adaugă la favorite"}
-            </button>
-          </div>
-        ))}
+      {accomodations.map((acc) => (
+        <div key={acc.id} className="accomodation-card">
+          <h4>{acc.name}</h4>
+          <p>Price: {acc.price}</p>
+          <p>Rating: {acc.rating}</p>
+          <p>City: {acc.city_name}</p>
+
+          <LikeButton accomodationId={acc.id} />
+        </div>
+      ))}
       </div>
     </div>
   );
