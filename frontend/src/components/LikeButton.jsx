@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import './LikeButton.css'; // dacă vrei fișier separat pentru stiluri
 
-const LikeButton = ({ accomodationId }) => {
+const LikeButton = ({ accomodationId, onLikeChange }) => {
   const userId = JSON.parse(localStorage.getItem("user"))?.id;
   const [liked, setLiked] = useState(false);
 
@@ -21,11 +22,15 @@ const LikeButton = ({ accomodationId }) => {
 
     await fetch(url, { method });
     setLiked(!liked);
+    onLikeChange(); // notifică Hotels să reîncarce
   };
 
   return (
-    <button onClick={handleLike}>
-      {liked ? "💔 Unlike" : "❤️ Like"}
+    <button
+      className={`like-button ${liked ? 'liked' : ''}`}
+      onClick={handleLike}
+    >
+      {liked ? '💔 Unlike' : '❤️ Like'}
     </button>
   );
 };

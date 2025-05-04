@@ -38,6 +38,23 @@ const Hotels = () => {
     return user?.id;
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/countries/${id}`);
+      const data = await response.json();
+      setCountryName(data.name || '');
+      setCities(data.cities || []);
+      setAccomodations(data.accomodations || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Eroare la încărcare:", error);
+      setLoading(false);
+    }
+  };
+  
+  const refreshAccomodations = () => {
+    fetchData(); // reîncarcă accomodations pentru a actualiza numărul de like-uri
+  };
 
   return (
     <div className="hotels-container">
@@ -60,7 +77,8 @@ const Hotels = () => {
           <p>Rating: {acc.rating}</p>
           <p>City: {acc.city_name}</p>
 
-          <LikeButton accomodationId={acc.id} />
+          <p>Total Likes: {acc.likes_count}</p>
+          <LikeButton accomodationId={acc.id} onLikeChange={() => refreshAccomodations()} />
         </div>
       ))}
       </div>

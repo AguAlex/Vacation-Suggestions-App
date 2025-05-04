@@ -16,7 +16,11 @@ class CountriesController < ApplicationController
   
     accomodations = cities.flat_map do |city|
       city.accomodations.map do |acc|
-        acc.attributes.merge(city_name: city.name)
+        # Adaugă numărul de like-uri pentru fiecare acomodation
+        acc_attributes = acc.attributes.merge(
+          city_name: city.name,
+          likes_count: acc.likes_count # numărul de like-uri
+        )
       end
     end
   
