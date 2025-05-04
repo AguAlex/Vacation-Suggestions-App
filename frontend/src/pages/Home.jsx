@@ -105,13 +105,22 @@ function Home({ user, setUser }) {
       {user ? (
         <div>
           <h1>Hello, {user.nume}!</h1>
-          <p>Welcome back to Vacation Suggestion App!</p>
+          <p>Welcome back to the Vacation Suggestion App! 🌍</p>
+          <p>We missed you! Start exploring your favorite destinations! ✈️</p>
         </div>
       ) : (
-        <div>
-          <h1>Hello! You can sign up.</h1>
+        <div className="not-logged-message">
+          <h2>Welcome to Vacation Suggestion App! 🎉</h2>
+          <p>Sign in or sign up to unlock amazing features, including:</p>
+          <ul>
+            <li>💙 Save your favorite destinations</li>
+            <li>🤖 Get personalized recommendations through our chatbot</li>
+            <li>📅 Enjoy exclusive travel tips and offers</li>
+          </ul>
+          <p>If you're not logged in yet, no worries! Let's find the perfect vacation for you! 🌴</p>
         </div>
       )}
+
       <br />
 
       {/* Top 3 Hotels Section */}

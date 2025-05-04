@@ -147,3 +147,14 @@ html, body {
 .accomodation-card p:nth-child(1) {
   font-weight: bold;
 }
+
+.not-logged-message {
+  background-color: #ffe4e1;
+  border: 1px solid #ff7f7f;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  width: 80%;
+  text-align: center;
+  color: #333;
+}
