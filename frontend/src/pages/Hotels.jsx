@@ -76,9 +76,16 @@ const Hotels = () => {
           <p>Price: {acc.price}</p>
           <p>Rating: {acc.rating}</p>
           <p>City: {acc.city_name}</p>
-
           <p>Total Likes: {acc.likes_count}</p>
           <LikeButton accomodationId={acc.id} onLikeChange={() => refreshAccomodations()} />
+          <p>
+            <button
+              onClick={() => window.open(acc.link, '_blank')}
+              className="external-link-button"
+            >
+              Visit Hotel Website 🌐
+            </button>
+          </p>
         </div>
       ))}
       </div>

@@ -99,7 +99,7 @@ function Home({ user, setUser }) {
             onClick={() => setSlideIndex(index)}
           ></span>
         ))}
-      </div>
+              </div>
 
       <br />
       {user ? (
@@ -120,21 +120,48 @@ function Home({ user, setUser }) {
           <p>If you're not logged in yet, no worries! Let's find the perfect vacation for you! 🌴</p>
         </div>
       )}
-
+      
       <br />
 
       {/* Top 3 Hotels Section */}
       <div className="top-hotels-section">
+        <div className="theme-switch-wrapper">
+            <label className="theme-switch">
+              <input
+                type="checkbox"
+                onChange={(e) => {
+                  const isDark = e.target.checked;
+                  document.body.classList.toggle("dark-mode", isDark);
+                  localStorage.setItem("theme", isDark ? "dark" : "light");
+                }}
+                defaultChecked={localStorage.getItem("theme") === "dark"}
+              />
+              <span className="slider round"></span>
+            </label>
+            <span className="toggle-label">🌙 Dark Mode</span>
+          </div>
         <h2>Top 3 Hotels Based on Likes</h2>
         <div className="top-accomodations">
           {topAccomodations.length > 0 ? (
             topAccomodations.map((acc) => (
-              <div key={acc.id} className="accomodation-card">
+              <div
+                key={acc.id}
+                className="accomodation-card"
+                
+              >
                 <h4>{acc.name}</h4>
                 <p>Price: {acc.price}</p>
                 <p>Rating: {acc.rating}</p>
                 <p>{acc.country_name}, {acc.city_name}</p>
                 <p>Total Likes: {acc.likes_count}</p>
+                <p>
+                  <button
+                    onClick={() => window.open(acc.link, '_blank')}
+                    className="external-link-button"
+                  >
+                    Visit Hotel Website 🌐
+                  </button>
+                </p>
               </div>
             ))
           ) : (
