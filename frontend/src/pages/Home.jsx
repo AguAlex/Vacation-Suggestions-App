@@ -129,12 +129,24 @@ function Home({ user, setUser }) {
         <div className="top-accomodations">
           {topAccomodations.length > 0 ? (
             topAccomodations.map((acc) => (
-              <div key={acc.id} className="accomodation-card">
+              <div
+                key={acc.id}
+                className="accomodation-card"
+                
+              >
                 <h4>{acc.name}</h4>
                 <p>Price: {acc.price}</p>
                 <p>Rating: {acc.rating}</p>
                 <p>{acc.country_name}, {acc.city_name}</p>
                 <p>Total Likes: {acc.likes_count}</p>
+                <p>
+                  <button
+                    onClick={() => window.open(acc.link, '_blank')}
+                    className="external-link-button"
+                  >
+                    Visit Hotel Website 🌐
+                  </button>
+                </p>
               </div>
             ))
           ) : (
