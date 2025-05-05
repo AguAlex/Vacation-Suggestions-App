@@ -14,8 +14,8 @@ coordinates = poi_data[['latitude', 'longitude']].values
 coordinates = (coordinates - coordinates.min(axis=0)) / (coordinates.max(axis=0) - coordinates.min(axis=0))
 
 # Setăm dimensiunile hărții SOM
-som_dim = 10  # Dimensiune 10x10 pentru harta SOM
-som = MiniSom(som_dim, som_dim, 2, sigma=1.0, learning_rate=0.5)  # 2 dimensiuni (latitudine și longitudine)
+som_dim = 4  # Dimensiune 10x10 pentru harta SOM
+som = MiniSom(som_dim, som_dim, 2, sigma=1.6, learning_rate=0.5)  # 2 dimensiuni (latitudine și longitudine)
 som.train(coordinates, 1000, verbose=True)  # Antrenăm SOM-ul cu 1000 de iterații
 
 # Obținem rezultatele SOM

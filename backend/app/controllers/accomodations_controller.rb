@@ -4,8 +4,15 @@ class AccomodationsController < ApplicationController
   # GET /accomodations
   # GET /accomodations.json
   def index
-    @accomodations = Accomodation.all
-    render json: @accomodations, status: :ok
+    if params[:city_id].present?
+      # Căutăm orașele care conțin numele în câmpul name
+      acc = Accomodation.where(city_id: params[:city_id])
+      else
+      # Dacă nu se trimite parametru 'name', returnăm toate orașele
+      acc = Accomodation.all
+      end
+  
+    render json: acc # Returnează orașele ca JSON
   end
 
   # GET /accomodations/1
