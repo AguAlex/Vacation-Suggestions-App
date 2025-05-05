@@ -4,8 +4,15 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.all
-    render json: @cities, status: :ok
+    if params[:name].present?
+    # Căutăm orașele care conțin numele în câmpul name
+    cities = City.where('name LIKE ?', "%#{params[:name]}%")
+    else
+    # Dacă nu se trimite parametru 'name', returnăm toate orașele
+    cities = City.all
+    end
+
+  render json: cities # Returnează orașele ca JSON
   end
 
   # GET /cities/1

@@ -41,7 +41,14 @@ function Header({ user, setUser }) {
         <li>
           <Link to="/vacation">See Vacations</Link>
         </li>
-
+        <li>
+          <Link to="/clusters" className="hover:underline">
+            Clusters
+          </Link>
+        </li>
+        <li>
+          <Link to="/map">Map</Link>
+        </li>
         {!user ? (
           <>
             <li>
