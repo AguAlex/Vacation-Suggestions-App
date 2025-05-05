@@ -147,3 +147,39 @@ html, body {
 .accomodation-card p:nth-child(1) {
   font-weight: bold;
 }
+
+.not-logged-message {
+  background-color: #f0f8ff;
+  border: 2px solid #00bfff;
+  padding: 25px;
+  margin: 20px auto;
+  border-radius: 15px;
+  width: 80%;
+  text-align: center;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.not-logged-message h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.not-logged-message ul {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.not-logged-message li {
+  margin-bottom: 10px;
+}
+
+.not-logged-message p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 15px;
+}

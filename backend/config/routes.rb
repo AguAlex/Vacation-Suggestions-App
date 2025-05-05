@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     delete 'unlike/:user_id', to: 'likes#destroy'
   end
 
+  # /users/:id/likes
+  resources :users do
+    get 'likes', on: :member 
+  end
+
   get '/top_accomodations', to: 'accomodations#top_accomodations'
 
   # post '/users/login', to: 'users#login'

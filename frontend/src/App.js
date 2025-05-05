@@ -6,8 +6,8 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Vacation from "./pages/Vacation";
 import "./App.css";
-
 import Hotels from "./pages/Hotels";
+import MyLikes from './pages/MyLikes';
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -25,6 +25,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/vacation" element={<Vacation />} />
         <Route path="/hotels/:id" element={<Hotels />} />
+        <Route path="/my-likes" element={<MyLikes />} />
       </Routes>
     </Router>
   );

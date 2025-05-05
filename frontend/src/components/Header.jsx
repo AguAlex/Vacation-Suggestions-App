@@ -52,9 +52,12 @@ function Header({ user, setUser }) {
             </li>
           </>
         ) : (
+          <>
+          <Link to="/my-likes">My Likes</Link>
           <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
+          </>
         )}
       </ul>
     </header>

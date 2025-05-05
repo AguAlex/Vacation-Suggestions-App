@@ -48,13 +48,32 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(email: params[:email])
   
-    if @user&.authenticate(params[:parola]) # folosește 'parola' aici, pentru a se potrivi cu câmpul din DB
+    if @user&.authenticate(params[:parola])
       render json: { message: 'Autentificare reușită', user: @user }, status: :ok
     else
       render json: { message: 'Email sau parolă greșită' }, status: :unauthorized
     end
   end
   
+  def likes
+    user = User.find(params[:id])
+    liked_accomodations = user.liked_accomodations.includes(city: :country)
+  
+    render json: liked_accomodations.as_json(
+      only: [:id, :name, :price, :rating],
+      methods: [:likes_count],
+      include: {
+        city: {
+          only: [:name],
+          include: {
+            country: {
+              only: [:name]
+            }
+          }
+        }
+      }
+    )
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
