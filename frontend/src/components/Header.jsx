@@ -33,7 +33,6 @@ function Header({ user, setUser }) {
     <header
       className={`header ${scrolled ? "header-scrolled" : ""} ${headerClass}`}
     >
-      <div className="logo">Vaccation Suggestion App</div>
       <ul className="nav-links">
         <li>
           <Link to="/home">Home</Link>
@@ -59,9 +58,12 @@ function Header({ user, setUser }) {
             </li>
           </>
         ) : (
+          <>
+          <Link to="/my-likes">My Likes</Link>
           <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
+          </>
         )}
       </ul>
     </header>

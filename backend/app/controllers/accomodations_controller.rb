@@ -47,7 +47,19 @@ class AccomodationsController < ApplicationController
   # DELETE /accomodations/1.json
   def destroy
     @accomodation.destroy
-    head :no_content  # Indică succesul fără a returna niciun conținut
+    head :no_content  
+  end
+
+  # GET /top_accomodations
+  def top_accomodations
+    top_accommodations = Accomodation.joins(city: :country)
+                                    .select('accomodations.id, accomodations.name, accomodations.price, accomodations.rating, cities.name AS city_name, countries.name AS country_name, COUNT(likes.id) AS likes_count, accomodations.link AS link')
+                                    .left_joins(:likes)
+                                    .group('accomodations.id, cities.id, countries.id')
+                                    .order('likes_count DESC')
+                                    .limit(3)
+  
+    render json: top_accommodations
   end
 
   private

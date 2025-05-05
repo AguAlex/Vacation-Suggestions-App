@@ -1,4 +1,4 @@
-
+/* Header scrolled state */
 .header-scrolled .logo,
 .header-scrolled .nav-links a,
 .header-scrolled .nav-links button {
@@ -6,23 +6,27 @@
   transition: color 0.5s ease;
 }
 
+/* Header pentru paginile non-home */
 .header-other .logo,
 .header-other .nav-links a {
   color: black;
 }
 
+/* Stilul pentru header */
 .header {
   background-color: transparent;
   display: flex;
-  position: fixed;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   top: 0;
   z-index: 100;
-  width: 100%;	
+  width: 100%;
+  position: fixed;
+  transition: background-color 0.3s ease;
 }
 
+/* Stiluri pentru logo */
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
@@ -37,13 +41,18 @@
   transform: scale(1.05);
 }
 
+/* Meniu de navigare */
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;  /* Adăugăm spațiu mai larg între elemente */
   list-style: none;
   background: transparent;
+  align-items: center; /* Aliniază vertical elementele */
+  justify-content: center; /* Centrează meniul pe axa orizontală */
+  margin: 0; /* Asigură că nu există margini inutile */
 }
 
+/* Elemente din meniu */
 .nav-links li {
   display: flex;
   align-items: center;
@@ -53,6 +62,7 @@
   border: none;
 }
 
+/* Linkuri și butoane */
 .nav-links a,
 .nav-links button {
   text-decoration: none;
@@ -68,20 +78,38 @@
 
 .nav-links a:hover,
 .nav-links button:hover {
-  transform: scale(1.08);
+  transform: scale(1.08); /* Adăugăm un efect de mărire la hover */
+  background-color: #007bff; /* Efect de hover cu schimbare de culoare */
+  color: white;
 }
 
 .nav-links button {
   font-family: inherit;
 }
 
+/* Media Queries pentru dispozitive mobile */
 @media (max-width: 768px) {
-  .nav-links {
-    gap: 1rem;
+  .header {
+    flex-direction: column;
+    align-items: center; /* Centrează header-ul pe dispozitivele mai mici */
+    padding: 1rem 2rem;
   }
 
   .logo {
     font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column; /* Meniul devine vertical */
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    width: 100%; /* Linkurile se extind pe toată lățimea */
+    text-align: center; /* Aliniază textul la centru */
   }
 }
 
@@ -103,10 +131,11 @@
   .nav-links a,
   .nav-links button {
     width: 100%;
-    text-align: left;
+    text-align: left; /* Aliniază textul la stânga pe dispozitivele mai mici */
   }
 }
 
+/* Containerele de căutare */
 .search-container {
   margin-top: 20px;
   width: 300px;
@@ -127,4 +156,3 @@
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
-

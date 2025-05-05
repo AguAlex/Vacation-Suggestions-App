@@ -5,11 +5,13 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Vacation from "./pages/Vacation";
+
 import Clusters from "./pages/Clusters"; // 🔺 Adaugă asta sus
 import POIMap from "./pages/POIMap";
-import "./App.css";
 
+import "./App.css";
 import Hotels from "./pages/Hotels";
+import MyLikes from './pages/MyLikes';
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -27,8 +29,11 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/vacation" element={<Vacation />} />
         <Route path="/hotels/:id" element={<Hotels />} />
+
         <Route path="/clusters" element={<Clusters />} />
         <Route path="/map" element={<POIMap />} />
+        <Route path="/my-likes" element={<MyLikes />} />
+
       </Routes>
     </Router>
   );

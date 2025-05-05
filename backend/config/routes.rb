@@ -5,8 +5,22 @@ Rails.application.routes.draw do
   resources :countries, only: [:index, :show]
   resources :users
 
+
   get '/api/points_of_interest', to: 'points_of_interest#index'
   get '/api/cities', to: 'cities#index'
+  resources :accomodations do
+    get 'liked/:user_id', to: 'likes#liked'
+    post 'like/:user_id', to: 'likes#create'
+    delete 'unlike/:user_id', to: 'likes#destroy'
+  end
+
+  # /users/:id/likes
+  resources :users do
+    get 'likes', on: :member 
+  end
+
+  get '/top_accomodations', to: 'accomodations#top_accomodations'
+
 
   # post '/users/login', to: 'users#login'
   post '/login', to: 'sessions#create'

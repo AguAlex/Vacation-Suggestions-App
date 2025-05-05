@@ -49,7 +49,7 @@ function Vacation() {
           filteredCountries.map((country) => (
             <Link to={`/hotels/${country.id}`} className="country-card">
               <h3>{country.name}</h3>
-              <img src={country.image} alt={country.name} />
+              <img src={`images/${country.name}.png`} alt={country.name} />
             </Link>
           ))
         ) : (
