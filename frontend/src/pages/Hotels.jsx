@@ -123,9 +123,7 @@ const Hotels = () => {
                       accomodationId={acc.id}
                       onLikeChange={refreshAccomodations}
                     />
-                  ) : (
-                    <p className="not-logged-message">Log in to like this hotel!</p>
-                  )}
+                  ) : null}
                   <button
                     onClick={() => window.open(acc.link, '_blank')}
                     className="external-link-button"

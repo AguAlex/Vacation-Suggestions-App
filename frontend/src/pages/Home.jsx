@@ -145,10 +145,10 @@ function Home({ user, setUser }) {
           <span className="toggle-label">🌙 Dark Mode</span>
         </div>
         <h2>Top 3 Hotels Based on Likes</h2>
-        <div className="top-accomodations">
+        <div className="top-accommodations">
           {topAccomodations.length > 0 ? (
             topAccomodations.map((acc) => (
-              <div key={acc.id} className="accomodation-card">
+              <div key={acc.id} className="accommodation-card">
                 <h4>{acc.name}</h4>
                 <p>Price: {acc.price}</p>
                 <p>Rating: {acc.rating}</p>

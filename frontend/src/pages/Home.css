@@ -138,7 +138,8 @@ html, body {
 }
 
 .not-logged-message {
-  background-color: transparent;
+  background-color: #f1c0cc;
+  border: #683340 solid 3px;
   padding: 25px;
   margin: 20px auto;
   border-radius: 15px;
