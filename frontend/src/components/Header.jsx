@@ -40,8 +40,7 @@ function Header({ user, setUser }) {
         <li>
           <Link to="/vacation">See Vacations</Link>
         </li>
-
-        
+       
 
         {!user ? (
           <>
@@ -58,9 +57,11 @@ function Header({ user, setUser }) {
             <li>
               <button onClick={handleLogout}>Logout</button>
             </li>
+
             <li>
               <Link to="/map">Points of Interest Map</Link>
             </li>
+
           </>
         )}
       </ul>
