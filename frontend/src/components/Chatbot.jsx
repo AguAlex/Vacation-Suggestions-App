@@ -170,9 +170,24 @@ const ChatBot = () => {
           </div>
 
           <div className="chat-actions">
-            <button onClick={handleNewVacationsChat}>🔍 Search Vacations</button>
-            <button onClick={handleNewChatGPT}>💬 Talk to Bot</button>
-            <button onClick={handleShowLinks}>🔗 Useful Links</button>
+            <button
+              onClick={handleNewVacationsChat}
+              className={activeChat === "vacations" ? "active" : ""}
+            >
+              🔍 Search Vacations
+            </button>
+            <button
+              onClick={handleNewChatGPT}
+              className={activeChat === "chatGPT" ? "active" : ""}
+            >
+              💬 Talk to Bot
+            </button>
+            <button
+              onClick={handleShowLinks}
+              className={activeChat === "links" ? "active" : ""}
+            >
+              🔗 Useful Links
+            </button>
           </div>
 
           <div className="chat-messages">

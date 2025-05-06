@@ -111,25 +111,51 @@
 
 .chat-actions {
   display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 15px;
 }
 
 .chat-actions button {
-  padding: 6px 12px;
-  border: none;
-  background-color: #007bff;
+  background-color: #4CAF50; 
   color: white;
-  border-radius: 5px;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .chat-actions button:hover {
-  background-color: #0056b3;
+  background-color: #45a049; 
+  transform: scale(1.05); 
 }
+
+.chat-actions button.active {
+  background-color: #ff9900; 
+  color: white; 
+  border: 2px solid #ff6700; 
+  box-shadow: 0 0 5px rgba(255, 105, 0, 0.7); 
+  transform: scale(1.05); 
+}
+
+.chat-actions button.active:hover {
+  background-color: #ff7f00; 
+  transform: scale(1.1); 
+}
+
+.chat-actions button:focus {
+  outline: none; 
+  box-shadow: 0 0 5px rgba(72, 175, 72, 0.6); 
+}
+
+
 
 .chat-messages {
   max-height: 400px;
