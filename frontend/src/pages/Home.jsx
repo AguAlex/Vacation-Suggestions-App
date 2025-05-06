@@ -5,6 +5,7 @@ import france from "../assets/France.jpg";
 import uk from "../assets/UnitedKingdom.jpg";
 import us from "../assets/UnitedStates.jpg";
 import ChatBot from "../components/Chatbot";
+import RecFav from "../components/RecFav";
 
 function Home({ user, setUser }) {
   const navigate = useNavigate();
@@ -173,7 +174,7 @@ function Home({ user, setUser }) {
 
       <br />
       {user ? <ChatBot /> : null}
-      
+      {user ? <RecFav /> : null}
     </div>
   );
 }
