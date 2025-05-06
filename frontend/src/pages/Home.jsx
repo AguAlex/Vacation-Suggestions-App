@@ -171,7 +171,8 @@ function Home({ user, setUser }) {
       </div>
 
       <br />
-      <ChatBot />
+      {user ? <ChatBot /> : null}
+      
     </div>
   );
 }
