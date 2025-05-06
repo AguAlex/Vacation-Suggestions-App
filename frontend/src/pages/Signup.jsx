@@ -43,9 +43,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="container" style={{ backgroundColor: 'rgb(247, 228, 233)'}}>
+    <div className="container">
       <img className="signup-image" src={image} alt="Image" />
-
       <div className="signup-container">
         <h2>Create an Account</h2>
         <form onSubmit={handleSignup} className="signup-form">

@@ -36,7 +36,7 @@ function Vacation() {
 
   return (
     <div className="countries-page-container">
-      <h2>Search for Countries or Cities</h2>
+      <h2>Search for Countries</h2>
       <input
         type="text"
         placeholder="Search for a city or country..."

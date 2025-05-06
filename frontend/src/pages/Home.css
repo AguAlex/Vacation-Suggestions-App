@@ -51,18 +51,6 @@ html, body {
   opacity: 1;  /* Slide activ devine vizibil */
 }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
 .active, .dot:hover {
   background-color: #717171;
 }
@@ -94,6 +82,7 @@ html, body {
   margin-bottom: 15px;
   filter: brightness(0.8);
 }
+
 .mySlides::after {
   content: "";
   position: absolute;
@@ -103,7 +92,7 @@ html, body {
   height: 100%;
   background: linear-gradient(
     to top,  
-    rgb(247, 228, 233) 0%,  
+    #f7e4e9 0%,  
     rgba(247, 228, 233, 0) 15%
   );
     pointer-events: none;
@@ -121,36 +110,36 @@ html, body {
   margin-bottom: 20px;
 }
 
-.top-accomodations {
+.top-accommodations {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-.accomodation-card {
-  background-color: #fff;
+.accommodation-card {
+  background-color: #f7e4e9;
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.accomodation-card h4 {
+.accommodation-card h4 {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
-.accomodation-card p {
+.accommodation-card p {
   margin: 5px 0;
 }
 
-.accomodation-card p:nth-child(1) {
+.accommodation-card p:nth-child(1) {
   font-weight: bold;
 }
 
 .not-logged-message {
-  background-color: #f0f8ff;
-  border: 2px solid #00bfff;
+  background-color: #f1c0cc;
+  border: #683340 solid 3px;
   padding: 25px;
   margin: 20px auto;
   border-radius: 15px;
@@ -182,79 +171,6 @@ html, body {
   font-size: 1rem;
   color: #555;
   margin-top: 15px;
-}
-
-body.dark-mode {
-  background-color: #584f4f;
-  color: #e0e0e0;
-}
-
-body.dark-mode .home-container {
-  background-color: #4b4848;
-}
-
-body.dark-mode .not-logged-message {
-  background-color: #1e1e1e;
-  border-color: #444;
-  color: #e0e0e0;
-}
-
-body.dark-mode .accomodation-card {
-  background-color: #1e1e1e;
-  border-color: #444;
-  color: #e0e0e0;
-}
-
-body.dark-mode .dot {
-  background-color: #888;
-}
-
-body.dark-mode .dot.active,
-body.dark-mode .dot:hover {
-  background-color: #ccc;
-}
-
-.theme-toggle-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s;
-}
-
-.theme-toggle-button:hover {
-  background-color: #555;
-}
-
-.theme-switch-wrapper {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 1000;
-}
-
-.theme-switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-
-.theme-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
 }
 
 .slider {
@@ -289,12 +205,5 @@ input:checked + .slider::before {
   transform: translateX(26px);
 }
 
-.toggle-label {
-  color: #333;
-  font-size: 1rem;
-}
 
-body.dark-mode .toggle-label {
-  color: #eee;
-}
 

@@ -16,6 +16,8 @@ import MyLikes from "./pages/MyLikes";
 import RecFav from "./components/RecFav";
 
 
+import "./global.css";
+
 function App() {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
