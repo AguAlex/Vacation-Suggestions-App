@@ -1,41 +1,57 @@
-.accommodation-list{
-  padding-top: 50px;;
+.my-likes-container {
+  padding: 30px;
+  background-color: #f0f8ff;
+  min-height: 100vh;
+}
+
+.my-likes-container h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.no-likes {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.accommodation-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  gap: 1.5rem;
-  }
-  
-  .my-likes-container h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    padding-top: 70px;
-  }
+}
 
-  .my-likes-container p {
-    padding-top: 20px;
-    font-size: large;
-    font-weight: 500;
-    text-align: center;
-  }
-  
-  .likes-accommodation-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 1.5rem;
-    width: 250px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    transition: transform 0.2s ease;
-  }
-  
-  .likes-accommodation-card h4 {
-    font-size: 1.5rem;
-  }
-  
-  .likes-accommodation-card p {
-    font-size: 1rem;
-  }
-  
+.accommodation-card {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.accommodation-card:hover {
+  transform: translateY(-5px);
+}
+
+.accommodation-card h4 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #4a90e2;
+}
+
+.accommodation-card p {
+  font-size: 1rem;
+  margin: 6px 0;
+  color: #444;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 40px;
+  color: #555;
+}

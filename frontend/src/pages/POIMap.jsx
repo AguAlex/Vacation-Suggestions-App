@@ -16,7 +16,7 @@ const POIMap = () => {
   const [pois, setPois] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/points_of_interests") // Ai grijă ca backend-ul să expună aceste date
+    fetch("http://localhost:3000/points_of_interests")
       .then((res) => res.json())
       .then((data) => setPois(data))
       .catch((err) => console.error("Failed to load POIs:", err));

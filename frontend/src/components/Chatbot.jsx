@@ -170,19 +170,42 @@ const ChatBot = () => {
           </div>
 
           <div className="chat-actions">
-            <button onClick={handleNewVacationsChat}>🔍 Search Vacations</button>
-            <button onClick={handleNewChatGPT}>💬 Talk to Bot</button>
-            <button onClick={handleShowLinks}>🔗 Useful Links</button>
+            <button
+              onClick={handleNewVacationsChat}
+              className={activeChat === "vacations" ? "active" : ""}
+            >
+              🔍 Search Vacations
+            </button>
+            <button
+              onClick={handleNewChatGPT}
+              className={activeChat === "chatGPT" ? "active" : ""}
+            >
+              💬 Talk to Bot
+            </button>
+            <button
+              onClick={handleShowLinks}
+              className={activeChat === "links" ? "active" : ""}
+            >
+              🔗 Useful Links
+            </button>
           </div>
 
           <div className="chat-messages">
             {messages.map((message, index) => (
               <div key={index} className={`message ${message.sender}`}>
-                {message.text}
+                <div className="avatar">
+                  <img
+                    src={message.sender === "bot" ? "https://miro.medium.com/v2/resize:fit:4800/format:webp/1*I9KrlBSL9cZmpQU3T2nq-A.jpeg" : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1746549894~exp=1746553494~hmac=2f00b3d3854ad17093df1bbe06f43e8560b94e719e6a20b2a74b5743b463c5ef&w=826"}
+                    alt={message.sender === "bot" ? "Bot" : "User"}
+                    className="avatar-img"
+                  />
+                </div>
+                <div className="message-text">{message.text}</div>
               </div>
             ))}
             <div id="messagesEnd" />
           </div>
+
 
           {activeChat && (
             <div className="chat-input">
