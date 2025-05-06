@@ -11,7 +11,8 @@ import POIMap from "./pages/POIMap";
 
 import "./App.css";
 import Hotels from "./pages/Hotels";
-import MyLikes from './pages/MyLikes';
+import MyLikes from "./pages/MyLikes";
+import RecFav from "./pages/RecFav";
 
 import "./global.css";
 
@@ -35,7 +36,7 @@ function App() {
         <Route path="/clusters" element={<Clusters />} />
         <Route path="/map" element={<POIMap />} />
         <Route path="/my-likes" element={<MyLikes />} />
-
+        <Route path="/rec_fav" element={<RecFav />} />
       </Routes>
     </Router>
   );

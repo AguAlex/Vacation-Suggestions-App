@@ -52,6 +52,26 @@ class AmadeusService
     end
   end
 
+  def self.get_iata_code_for_city(city_name,access_token)
+
+    response = HTTParty.get("https://test.api.amadeus.com/v1/reference-data/locations/cities",
+      query: {
+        keyword: city_name,
+        subType: 'CITY',
+        page: { limit: 1 }
+      },
+      headers: {
+        "Authorization" => "Bearer #{access_token}"
+      }
+    )
+
+    if response.success? && response['data'].present?
+      response['data'][0]['iataCode']
+    else
+      nil
+    end
+  end
+
   def self.get_country_name_by_code(country_code)
     url = "https://restcountries.com/v3.1/alpha/#{country_code}"
 
@@ -159,4 +179,32 @@ class AmadeusService
       []
     end
   end
-end
+
+  def self.get_recommendations_by_city_code(city_code, access_token)
+    url = "https://test.api.amadeus.com/v1/reference-data/recommended-locations"
+  
+    response = HTTParty.get(url, query: {
+      cityCodes: city_code
+    }, headers: {
+      "Authorization" => "Bearer #{access_token}"
+    })
+  
+    begin
+      parsed_response = JSON.parse(response.body)
+  
+      if parsed_response.is_a?(Hash) && parsed_response.key?("data")
+        parsed_response["data"]
+      else
+        Rails.logger.error("Unexpected API response format: #{parsed_response.inspect}")
+        []
+      end
+    rescue JSON::ParserError => e
+      Rails.logger.error("JSON Parse Error: #{e.message} - Response: #{response.body}")
+      []
+    rescue TypeError, NoMethodError => e
+      Rails.logger.error("Type Error: #{e.message} - Parsed Response: #{parsed_response.inspect}")
+      []
+    end
+  end
+  
+  end

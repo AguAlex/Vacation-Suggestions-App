@@ -48,6 +48,9 @@ function Header({ user, setUser }) {
         <li>
           <Link to="/map">Map</Link>
         </li>
+        <li>
+          <Link to="/rec_fav">Recommended</Link>
+        </li>
         {!user ? (
           <>
             <li>
@@ -59,10 +62,10 @@ function Header({ user, setUser }) {
           </>
         ) : (
           <>
-          <Link to="/my-likes">My Likes</Link>
-          <li>
-            <button onClick={handleLogout}>Logout</button>
-          </li>
+            <Link to="/my-likes">My Likes</Link>
+            <li>
+              <button onClick={handleLogout}>Logout</button>
+            </li>
           </>
         )}
         <div className="theme-switch-wrapper">
