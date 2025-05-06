@@ -17,9 +17,16 @@ Rails.application.routes.draw do
   # /users/:id/likes
   resources :users do
     get 'likes', on: :member 
+        # Subresursa pentru recommended pentru fiecare utilizator
+      # get 'recommended' , on: :member
   end
+ 
+  get '/users/:user_id/recommended', to: 'recommended#recommended'
 
   get '/top_accomodations', to: 'accomodations#top_accomodations'
+  
+  # get "/api/recommended", to: "recommended#recommended"
+  
 
 
   # post '/users/login', to: 'users#login'
