@@ -48,7 +48,7 @@ class PopulateDatabaseJob < ApplicationJob
       country = Country.find_or_create_by(name: country_name)
 
       # Creează orașul asociat
-      city = City.find_or_create_by(name: first_city["name"], country: country)
+      city = City.find_or_create_by(name: first_city["name"], iata_code:first_city["iataCode"],country: country)
       # city.latitude, city.longitude = get_city_coordinates(city_data[:name])
       latitude = first_city["geoCode"]["latitude"]
       longitude = first_city["geoCode"]["longitude"]
