@@ -129,21 +129,6 @@ function Home({ user, setUser }) {
 
       {/* Top 3 Hotels Section */}
       <div className="top-hotels-section">
-        <div className="theme-switch-wrapper">
-          <label className="theme-switch">
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                const isDark = e.target.checked;
-                document.body.classList.toggle("dark-mode", isDark);
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-              }}
-              defaultChecked={localStorage.getItem("theme") === "dark"}
-            />
-            <span className="slider round"></span>
-          </label>
-          <span className="toggle-label">🌙 Dark Mode</span>
-        </div>
         <h2>Top 3 Hotels Based on Likes</h2>
         <div className="top-accommodations">
           {topAccomodations.length > 0 ? (
