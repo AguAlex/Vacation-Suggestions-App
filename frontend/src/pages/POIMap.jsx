@@ -28,7 +28,7 @@ const POIMap = () => {
         center={[40.71427, -74.00597]}
         zoom={3}
         minZoom={3}
-        maxZoom={8}
+        maxZoom={15}
         scrollWheelZoom={true}
         style={{ height: "85vh", width: "100%" }}
         maxBounds={[

@@ -4,21 +4,22 @@ body {
     margin: 0;
   }
   
-  .container{
+  .signup-container{
     display: flex;
     justify-content: space-evenly;
   }
 
-  .signup-container {
+  .signup-form-container {
     max-width: 400px;
     margin: 80px auto;
     padding: 100px 30px;
-    background-color: rgb(247, 228, 233);
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     text-align: center;
   }
   
-  .signup-container h2 {
+  .signup-form-container h2 {
     margin-bottom: 20px;
     color: #333;
   }
