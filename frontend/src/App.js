@@ -13,6 +13,8 @@ import "./App.css";
 import Hotels from "./pages/Hotels";
 import MyLikes from './pages/MyLikes';
 
+import "./global.css";
+
 function App() {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");

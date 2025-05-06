@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Chatbot.css"; // Importăm stilurile din fișier extern
 
+
 const ChatBot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -183,12 +184,28 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="chatbot-fixed-container">
+    <div className="chatbot-container">
       <div className="chat-window">
         <div className="chat-header">
-          <button className="new-chat-btn" onClick={handleNewChat}>
-            New Chat
-          </button>
+          <div className="new-chat">
+             <button className="new-chat-btn" onClick={handleNewChat}>
+               <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 strokeWidth="2"
+                 strokeLinecap="round"
+                 strokeLinejoin="round"
+                 className="feather feather-message-circle"
+               >
+                 <path d="M21 2v12a4 4 0 0 1-4 4H4l-2 3V6a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+               </svg>
+               <span className="new-chat-text">New Chat</span>
+             </button>
+           </div>
           <span>Chat with Bot</span>
         </div>
         <div className="chat-actions">

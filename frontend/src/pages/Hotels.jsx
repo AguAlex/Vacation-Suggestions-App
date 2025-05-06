@@ -9,34 +9,10 @@ const Hotels = () => {
   const [cities, setCities] = useState([]);
   const [accomodations, setAccomodations] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/countries/${id}`);
-        const data = await response.json();
-        console.log(data);
-        setCountryName(data.name || '');
-        setCities(data.cities || []);
-        setAccomodations(data.accomodations || []);
-        setLoading(false);
-      } catch (error) {
-        console.error("Eroare la încărcare:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  if (loading) {
-    return <div className="hotels-loading">Se încarcă...</div>;
-  }
-
-  const getUserIdFromLocalStorage = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user?.id;
-  };
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -47,47 +23,120 @@ const Hotels = () => {
       setAccomodations(data.accomodations || []);
       setLoading(false);
     } catch (error) {
-      console.error("Eroare la încărcare:", error);
+      console.error("Error loading:", error);
       setLoading(false);
     }
   };
-  
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
   const refreshAccomodations = () => {
-    fetchData(); // reîncarcă accomodations pentru a actualiza numărul de like-uri
+    fetchData();
   };
+
+  const handleResetFilters = () => {
+    setSelectedCity(null);
+    setMinPrice('');
+    setMaxPrice('');
+  };
+
+  const filteredAccomodations = accomodations.filter((acc) => {
+    const matchesCity = selectedCity ? acc.city_name === selectedCity : true;
+    const matchesMin = minPrice ? acc.price >= Number(minPrice) : true;
+    const matchesMax = maxPrice ? acc.price <= Number(maxPrice) : true;
+    return matchesCity && matchesMin && matchesMax;
+  });
 
   return (
     <div className="hotels-container">
-      <h2 className="section-title">Cities from {countryName}</h2>
-      <ul className="city-list">
-        {cities.map((city) => (
-          <li key={city.id} className="city-item">
-            {city.name}
-          </li>
-        ))}
-      </ul>
 
-      <h3 className="section-title">Available hotels</h3>
-      <br/>
-      <div className="accomodation-grid">
-      {accomodations.map((acc) => (
-        <div key={acc.id} className="accomodation-card">
-          <h4>{acc.name}</h4>
-          <p>Price: {acc.price}</p>
-          <p>Rating: {acc.rating}</p>
-          <p>City: {acc.city_name}</p>
-          <p>Total Likes: {acc.likes_count}</p>
-          <LikeButton accomodationId={acc.id} onLikeChange={() => refreshAccomodations()} />
-          <p>
-            <button
-              onClick={() => window.open(acc.link, '_blank')}
-              className="external-link-button"
-            >
-              Visit Hotel Website 🌐
+      <div className="hotels-content">
+        {showFilters && (
+          <aside className="filters-sidebar">
+            <div className="filters-title"><h3>Filters</h3></div>
+
+            <div className="filter-group">
+              <label>City</label>
+              <ul className="city-list">
+                {cities.map((city) => (
+                  <li
+                    key={city.id}
+                    className={`city-item ${selectedCity === city.name ? 'selected' : ''}`}
+                    onClick={() =>
+                      setSelectedCity((prevCity) => (prevCity === city.name ? null : city.name))
+                    }
+                  >
+                    {city.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="filter-group">
+              <label>Min Budget</label>
+              <input
+                type="number"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+                placeholder="Min"
+              />
+            </div>
+
+            <div className="filter-group">
+              <label>Max Budget</label>
+              <input
+                type="number"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                placeholder="Max"
+              />
+            </div>
+
+            <button className="reset-button" onClick={handleResetFilters}>
+              Reset Filters
             </button>
-          </p>
-        </div>
-      ))}
+          </aside>
+        )}
+
+        <section className="accommodations-section">
+          <div className="section-header">
+            <h3 className="section-title">Available hotels</h3>
+            <button className="toggle-filters-btn" onClick={() => setShowFilters(!showFilters)}>
+              <p>{showFilters ? 'Hide Filters' : 'Show Filters'}</p>
+            </button>
+          </div>
+          <div className="accommodation-grid">
+            {filteredAccomodations.length === 0 ? (
+              <p>No hotels available for selected filters.</p>
+            ) : (
+              filteredAccomodations.map((acc) => (
+                <div key={acc.id} className="accommodation-card">
+                  <h4>{acc.name}</h4>
+                  <p>Price: {acc.price}</p>
+                  <p>Rating: {acc.rating}</p>
+                  <p>City: {acc.city_name}</p>
+                  <p>Total Likes: {acc.likes_count}</p>
+                  {localStorage.getItem("token") ? (
+                    <LikeButton
+                      accomodationId={acc.id}
+                      onLikeChange={refreshAccomodations}
+                    />
+                  ) : (
+                    <p className="not-logged-message">Log in to like this hotel!</p>
+                  )}
+                  <button
+                    onClick={() => window.open(acc.link, '_blank')}
+                    className="external-link-button"
+                  >
+                    Visit Hotel Website 🌐
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );

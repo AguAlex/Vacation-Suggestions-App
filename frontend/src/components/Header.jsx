@@ -65,6 +65,22 @@ function Header({ user, setUser }) {
           </li>
           </>
         )}
+        <div className="theme-switch-wrapper">
+          <label className="theme-switch">
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                const isDark = e.target.checked;
+                document.body.classList.toggle("dark-mode", isDark);
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+              }}
+              defaultChecked={localStorage.getItem("theme") === "dark"}
+            />
+            <span className="slider round"></span>
+          </label>
+          <span className="toggle-label">🌙 Dark Mode</span>
+        </div>
+
       </ul>
     </header>
   );

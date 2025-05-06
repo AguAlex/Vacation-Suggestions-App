@@ -1,3 +1,7 @@
 .map-container {
-  padding: 1rem;
+  margin: 20px auto;
+  max-width: 95vw;
+  padding-top: 70px;
+  overflow: hidden;
+  background: none;
 }

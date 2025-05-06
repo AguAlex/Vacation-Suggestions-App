@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./POIMap.css";
 
-// Fix pentru iconul implicit
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -27,14 +26,28 @@ const POIMap = () => {
     <div className="map-container">
       <MapContainer
         center={[40.71427, -74.00597]}
-        zoom={2}
-        scrollWheelZoom
-        style={{ height: "90vh", width: "100%" }}
+        zoom={3}
+        minZoom={3}
+        maxZoom={8}
+        scrollWheelZoom={true}
+        style={{ height: "85vh", width: "100%" }}
+        maxBounds={[
+          [-85.05112878, -180],
+          [85.05112878, 180],
+        ]}
+        maxBoundsViscosity={1}
       >
+
         <TileLayer
-          attribution="&copy; OpenStreetMap"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap contributors"
+          noWrap={true}
+          maxBounds={[
+            [-85.05112878, -180],
+            [85.05112878, 180],
+          ]}
         />
+
         {pois.map((poi, idx) => (
           <Marker key={idx} position={[poi.latitude, poi.longitude]}>
             <Popup>

@@ -1,8 +1,10 @@
+
+
 .clusters-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 20px;
-  padding: 2rem;
+  padding-top: 70px;
 }
 
 .cluster-box {
