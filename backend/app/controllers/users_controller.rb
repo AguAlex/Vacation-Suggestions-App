@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    head :no_content # Indică succesul fără a returna niciun conținut
+    head :no_content
   end
 
   # POST /users/login
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     liked_accomodations = user.liked_accomodations.includes(city: :country)
   
     render json: liked_accomodations.as_json(
-      only: [:id, :name, :price, :rating],
+      only: [:id, :name, :price, :rating, :link],
       methods: [:likes_count],
       include: {
         city: {

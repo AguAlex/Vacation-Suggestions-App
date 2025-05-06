@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./POIMap.css";
 
-// Fix pentru iconul implicit
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -17,7 +16,7 @@ const POIMap = () => {
   const [pois, setPois] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/points_of_interests") // Ai grijă ca backend-ul să expună aceste date
+    fetch("http://localhost:3000/points_of_interests")
       .then((res) => res.json())
       .then((data) => setPois(data))
       .catch((err) => console.error("Failed to load POIs:", err));

@@ -12,7 +12,9 @@ import POIMap from "./pages/POIMap";
 import "./App.css";
 import Hotels from "./pages/Hotels";
 import MyLikes from "./pages/MyLikes";
-import RecFav from "./pages/RecFav";
+
+import RecFav from "./components/RecFav";
+
 
 function App() {
   const [user, setUser] = useState(() => {
