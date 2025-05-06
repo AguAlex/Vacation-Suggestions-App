@@ -12,7 +12,7 @@ module Api
           "Content-Type" => "application/json"
         },
         body: {
-          model: "llama3-8b-8192",
+          model: "compound-beta",
           messages: [
             { role: "user", content: prompt }
           ]
