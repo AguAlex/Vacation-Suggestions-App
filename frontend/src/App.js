@@ -6,7 +6,6 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Vacation from "./pages/Vacation";
 
-import Clusters from "./pages/Clusters"; //  Adaugă asta sus
 import POIMap from "./pages/POIMap";
 
 import "./App.css";
@@ -35,7 +34,6 @@ function App() {
         <Route path="/vacation" element={<Vacation />} />
         <Route path="/hotels/:id" element={<Hotels />} />
 
-        <Route path="/clusters" element={<Clusters />} />
         <Route path="/map" element={<POIMap />} />
         <Route path="/my-likes" element={<MyLikes />} />
         <Route path="/rec_fav" element={<RecFav />} />
