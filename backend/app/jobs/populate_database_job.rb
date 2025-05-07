@@ -82,8 +82,8 @@ class PopulateDatabaseJob < ApplicationJob
           rating: activity["rating"]&.to_f || 0.0, # Evită nil errors
           link: activity["bookingLink"] || activity["self"]["href"], # Fallback la `self["href"]`
           image: (activity["pictures"] || []).join(", "), # Evită nil errors
-          latitude:latitude,
-          longitude:longitude
+          latitude:activity["geoCode"]["latitude"],
+          longitude:activity["geoCode"]["longitude"]
         )
         end
         hotels = AmadeusService.get_hotels(first_city["iataCode"], access_token)
