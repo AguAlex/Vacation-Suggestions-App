@@ -30,7 +30,7 @@ const LikeButton = ({ accomodationId, onLikeChange }) => {
       className={`like-button ${liked ? 'liked' : ''}`}
       onClick={handleLike}
     >
-      {liked ? '💔 Unlike' : '❤️ Like'}
+      {liked ? '💔 Dislike' : '❤️ Like'}
     </button>
   );
 };

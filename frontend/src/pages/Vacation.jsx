@@ -13,8 +13,8 @@ function Vacation() {
         const response = await fetch("http://localhost:3000/countries");
         if (!response.ok) throw new Error("Failed to fetch countries");
         const data = await response.json();
-        setCountries(data); // Păstrează toate țările
-        setFilteredCountries(data); // Filtrarea inițială va fi pentru toate
+        setCountries(data);
+        setFilteredCountries(data);
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
@@ -25,7 +25,7 @@ function Vacation() {
 
   useEffect(() => {
     if (!searchTerm) {
-      setFilteredCountries(countries); // Dacă nu există termen de căutare, arată toate țările
+      setFilteredCountries(countries);
     } else {
       const filtered = countries.filter((country) =>
         country.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -36,7 +36,7 @@ function Vacation() {
 
   return (
     <div className="countries-page-container">
-      <h2>Search for Countries or Cities</h2>
+      <h2>Search for Countries</h2>
       <input
         type="text"
         placeholder="Search for a city or country..."

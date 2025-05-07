@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./POIMap.css";
 
+
 // Marker galben pentru POI
 const poiIcon = new L.Icon({
   iconUrl: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
@@ -20,7 +21,7 @@ const airportIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
-// Fix pentru iconul implicit
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -34,7 +35,7 @@ const POIMap = () => {
   const [airports, setAirports] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/points_of_interests") // Ai grijă ca backend-ul să expună aceste date
+    fetch("http://localhost:3000/points_of_interests")
       .then((res) => res.json())
       .then((data) => {
         console.log("POI data:", data); // Vezi exact ce e aici
@@ -56,14 +57,28 @@ const POIMap = () => {
     <div className="map-container">
       <MapContainer
         center={[40.71427, -74.00597]}
-        zoom={2}
-        scrollWheelZoom
-        style={{ height: "90vh", width: "100%" }}
+        zoom={3}
+        minZoom={3}
+        maxZoom={15}
+        scrollWheelZoom={true}
+        style={{ height: "85vh", width: "100%" }}
+        maxBounds={[
+          [-85.05112878, -180],
+          [85.05112878, 180],
+        ]}
+        maxBoundsViscosity={1}
       >
+
         <TileLayer
-          attribution="&copy; OpenStreetMap"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap contributors"
+          noWrap={true}
+          maxBounds={[
+            [-85.05112878, -180],
+            [85.05112878, 180],
+          ]}
         />
+
         {pois.map((poi, idx) => (
           <Marker
             key={`poi-${idx}`}

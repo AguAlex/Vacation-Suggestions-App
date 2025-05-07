@@ -1,20 +1,28 @@
 /* Header scrolled state */
-.header-scrolled .logo,
 .header-scrolled .nav-links a,
-.header-scrolled .nav-links button {
+.header-scrolled .nav-links button,
+.header-scrolled .theme-switch-wrapper .toggle-label{
   color: black;
   transition: color 0.5s ease;
 }
 
 /* Header pentru paginile non-home */
 .header-other .logo,
-.header-other .nav-links a {
+.header-other .nav-links a,
+.header-other .nav-links button,
+.header-other .theme-switch-wrapper .toggle-label {
   color: black;
+}
+
+.toggle-label{
+  color:white;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 /* Stilul pentru header */
 .header {
-  background-color: transparent;
+  background-color: transparent; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,6 +32,14 @@
   width: 100%;
   position: fixed;
   transition: background-color 0.3s ease;
+}
+
+.header-scrolled{
+  background-color: rgb(247, 228, 233);
+}
+
+.header-other{
+  background-color: rgb(247, 228, 233);
 }
 
 /* Stiluri pentru logo */

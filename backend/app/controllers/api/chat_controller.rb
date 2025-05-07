@@ -1,6 +1,6 @@
 module Api
   class ChatController < ApplicationController
-    skip_before_action :verify_authenticity_token  # dacă folosești POST din exterior (ex: Postman sau frontend)
+    skip_before_action :verify_authenticity_token 
 
     def create
       prompt = params[:prompt] || params.dig(:chat, :prompt)

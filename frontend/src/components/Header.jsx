@@ -40,17 +40,8 @@ function Header({ user, setUser }) {
         <li>
           <Link to="/vacation">See Vacations</Link>
         </li>
-        <li>
-          <Link to="/clusters" className="hover:underline">
-            Clusters
-          </Link>
-        </li>
-        <li>
-          <Link to="/map">Map</Link>
-        </li>
-        <li>
-          <Link to="/rec_fav">Recommended</Link>
-        </li>
+       
+
         {!user ? (
           <>
             <li>
@@ -66,8 +57,29 @@ function Header({ user, setUser }) {
             <li>
               <button onClick={handleLogout}>Logout</button>
             </li>
+
+            <li>
+              <Link to="/map">Points of Interest Map</Link>
+            </li>
+
           </>
         )}
+        <div className="theme-switch-wrapper">
+          <label className="theme-switch">
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                const isDark = e.target.checked;
+                document.body.classList.toggle("dark-mode", isDark);
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+              }}
+              defaultChecked={localStorage.getItem("theme") === "dark"}
+            />
+            <span className="slider round"></span>
+          </label>
+          <span className="toggle-label">🌙 Dark Mode</span>
+        </div>
+
       </ul>
     </header>
   );

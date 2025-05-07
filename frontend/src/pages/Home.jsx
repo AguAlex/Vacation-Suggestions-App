@@ -5,6 +5,7 @@ import france from "../assets/France.jpg";
 import uk from "../assets/UnitedKingdom.jpg";
 import us from "../assets/UnitedStates.jpg";
 import ChatBot from "../components/Chatbot";
+import RecFav from "../components/RecFav";
 
 function Home({ user, setUser }) {
   const navigate = useNavigate();
@@ -128,26 +129,11 @@ function Home({ user, setUser }) {
 
       {/* Top 3 Hotels Section */}
       <div className="top-hotels-section">
-        <div className="theme-switch-wrapper">
-          <label className="theme-switch">
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                const isDark = e.target.checked;
-                document.body.classList.toggle("dark-mode", isDark);
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-              }}
-              defaultChecked={localStorage.getItem("theme") === "dark"}
-            />
-            <span className="slider round"></span>
-          </label>
-          <span className="toggle-label">🌙 Dark Mode</span>
-        </div>
         <h2>Top 3 Hotels Based on Likes</h2>
-        <div className="top-accomodations">
+        <div className="top-accommodations">
           {topAccomodations.length > 0 ? (
             topAccomodations.map((acc) => (
-              <div key={acc.id} className="accomodation-card">
+              <div key={acc.id} className="accommodation-card">
                 <h4>{acc.name}</h4>
                 <p>Price: {acc.price}</p>
                 <p>Rating: {acc.rating}</p>
@@ -172,7 +158,8 @@ function Home({ user, setUser }) {
       </div>
 
       <br />
-      <ChatBot />
+      {user ? <ChatBot /> : null}
+      {user ? <RecFav /> : null}
     </div>
   );
 }

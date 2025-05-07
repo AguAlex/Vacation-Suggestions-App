@@ -50,8 +50,8 @@ const Login = () => {
   };
 
   return (
-    <div className="container" style={{ backgroundColor: 'rgb(247, 228, 233)', minHeight: '100vh' }}>
-      <div className="login-container" >
+    <div className="login-container">
+      <div className="login-form-container">
         <h2>Welcome Back</h2>
         <form onSubmit={handleLogin} className="login-form">
           <input 
