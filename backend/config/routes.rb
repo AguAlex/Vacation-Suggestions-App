@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :users
 
 
-  get '/api/points_of_interest', to: 'points_of_interest#index'
+  get '/api/points_of_interests', to: 'points_of_interests#index'
   get '/api/cities', to: 'cities#index'
+  get '/api/airports', to: 'airports#index'
   resources :accomodations do
     get 'liked/:user_id', to: 'likes#liked'
     post 'like/:user_id', to: 'likes#create'

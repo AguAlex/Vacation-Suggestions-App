@@ -53,6 +53,38 @@ class PopulateDatabaseJob < ApplicationJob
       latitude = first_city["geoCode"]["latitude"]
       longitude = first_city["geoCode"]["longitude"]
 
+      airports=AmadeusService.get_airports(latitude,longitude,access_token);
+      if airports.is_a?(String)
+        begin
+          Rails.logger.info "askf"  # Pentru logare de tip info
+
+          airports = JSON.parse(airports)
+        rescue JSON::ParserError => e
+          Rails.logger.error "JSON Parse Error: #{e.message} - "
+          airports = {}
+        end
+      end
+      Rails.logger.info "activities Response Type: #{airports.class}"
+
+      (airports).each do |airport|
+        Rails.logger.info(airport.inspect)
+        Rails.logger.info "airport import started"
+      
+        Airport.find_or_create_by(
+          name: airport["name"],
+          detailed_name: airport["detailedName"],
+          iataCode: airport["iataCode"],
+          latitude: airport.dig("geoCode", "latitude"),
+          longitude: airport.dig("geoCode", "longitude"),
+          cityName: airport.dig("address", "cityName"),
+          cityCode: airport.dig("address", "cityCode"),
+          countryName: airport.dig("address", "countryName"),
+          countryCode: airport.dig("address", "countryCode")
+        )
+      end
+      
+
+
       activities = AmadeusService.get_activities(latitude, longitude, 5, access_token)
       if activities.is_a?(String)
         begin
