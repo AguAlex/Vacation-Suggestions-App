@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://neondb_owner:npg_StYVO2uKad6Q@ep-bold-thunder-a2v1armx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  pgdata:

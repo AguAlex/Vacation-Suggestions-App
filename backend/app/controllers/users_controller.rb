@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: { message: 'User created successfully', user: @user }, status: :created
     else
-      puts @user.errors.full_messages
+      # puts @user.errors.full_messages
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
