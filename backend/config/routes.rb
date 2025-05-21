@@ -21,6 +21,8 @@ Rails.application.routes.draw do
         # Subresursa pentru recommended pentru fiecare utilizator
       # get 'recommended' , on: :member
   end
+
+  post 'users/login', to: 'users#login'
  
   get '/users/:user_id/recommended', to: 'recommended#recommended'
 
