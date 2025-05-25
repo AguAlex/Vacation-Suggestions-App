@@ -1,43 +1,47 @@
-version: "3.8"
+version: "3.9"
 
 services:
-  backend:
-    build: ./backend
-    ports:
-      - "3001:3000"
-    volumes:
-      - ./backend:/app
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://neondb_owner:npg_StYVO2uKad6Q@ep-bold-thunder-a2v1armx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
-    networks:
-      - app-network
-
   frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+    build:
+      context: ./frontend
     volumes:
       - ./frontend:/app
+    ports:
+      - "3001:3001"
     depends_on:
       - backend
     networks:
-      - app-network
+      - appnet
+
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://neondb_owner:npg_StYVO2uKad6Q@ep-bold-thunder-a2v1armx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+      SECRET_KEY_BASE: 0d78202ead5103319851a09a93dbc6d6bc3ff08c55e5e2278ac3c44eda4c311380e7e4873f362a26111846aefc62ceb4f29bc6a6faf25a683e5f3305fa8b7483
+    networks:
+      - appnet
 
   db:
-    image: postgres:13
+    image: postgres:14
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      POSTGRES_USER: neondb_owner
+      POSTGRES_PASSWORD: npg_StYVO2uKad6Q
+      POSTGRES_DB: neondb
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - app-network
-
-networks:
-  app-network:
+      - appnet
 
 volumes:
   pgdata:
+
+networks:
+  appnet:
+    driver: bridge
