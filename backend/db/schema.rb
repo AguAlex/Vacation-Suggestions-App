@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_06_133424) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_124258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_133424) do
     t.string "link"
     t.string "imagine"
     t.index ["city_id"], name: "index_accomodations_on_city_id"
+  end
+
+  create_table "airports", force: :cascade do |t|
+    t.string "name"
+    t.string "detailed_name"
+    t.string "iataCode"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "cityName"
+    t.string "cityCode"
+    t.string "countryName"
+    t.string "countryCode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cities", force: :cascade do |t|

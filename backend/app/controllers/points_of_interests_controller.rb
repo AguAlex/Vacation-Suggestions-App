@@ -4,7 +4,6 @@ class PointsOfInterestsController < ApplicationController
   # GET /points_of_interests
   # GET /points_of_interests.json
   def index
-    # @points_of_interests = PointsOfInterest.all
     # render json: @points_of_interests, status: :ok
     if params[:city_id].present?
       # Căutăm orașele care conțin numele în câmpul name
@@ -21,7 +20,8 @@ class PointsOfInterestsController < ApplicationController
   # GET /points_of_interests/1
   # GET /points_of_interests/1.json
   def show
-    render json: @points_of_interest, status: :ok
+    @points_of_interests = PointsOfInterest.all
+    render json: @points_of_interests, status: :ok
   end
 
   # POST /points_of_interests

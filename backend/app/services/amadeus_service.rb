@@ -206,5 +206,117 @@ class AmadeusService
       []
     end
   end
+
+
+  def self.get_hotel_details(hotel_id, access_token)
+    url = "https://test.api.amadeus.com/v3/shopping/hotel-offers"
+    response = HTTParty.get(url, query: {
+      hotelIds: [ hotel_id ]
+    }, headers: {
+      "Authorization" => "Bearer #{access_token}"
+    })
+    # Log pentru debugging
+    #  Rails.logger.info("API Response: #{response.body}")
+    response.parsed_response["data"] || []
+  end
+  def self.get_hotels(city_code, access_token)
+    url = "https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city"
+
+    response = HTTParty.get(url, query: {
+      cityCode: city_code,
+      radius: 5,
+      radiusUnit: "KM",
+      hotelSource: "ALL"
+    }, headers: {
+      "Authorization" => "Bearer #{access_token}"
+    })
+
+    # Log pentru debugging
+    # Rails.logger.info("Raw API Response: #{response.body}")
+
+    begin
+      parsed_response = JSON.parse(response.body)
+
+      # Verificăm dacă răspunsul este un Hash și are cheia "data"
+      if parsed_response.is_a?(Hash) && parsed_response.key?("data")
+        parsed_response["data"]
+      else
+        # Rails.logger.error("Unexpected API response format: #{parsed_response.inspect}")
+        []
+      end
+    rescue JSON::ParserError => e
+      # Rails.logger.error("JSON Parse Error: #{e.message} - Response: #{response.body}")
+      []
+    rescue TypeError, NoMethodError => e
+      # Rails.logger.error("Type Error: #{e.message} - Parsed Response: #{parsed_response.inspect}")
+      []
+    end
+  end
+
+
+
+
+  def self.get_airport_routes(airport_code,country_code, access_token)
+    url = "https://test.api.amadeus.com/v1/reference-data/recommended-locations"
+  
+    response = HTTParty.get(url, query: {
+      departureAirportCode: airport_code,
+      arrivalCountryCode: country_code
+
+    }, headers: {
+      "Authorization" => "Bearer #{access_token}"
+    })
+  
+    begin
+      parsed_response = JSON.parse(response.body)
+  
+      if parsed_response.is_a?(Hash) && parsed_response.key?("data")
+        parsed_response["data"]
+      else
+        Rails.logger.error("Unexpected API response format: #{parsed_response.inspect}")
+        []
+      end
+    rescue JSON::ParserError => e
+      Rails.logger.error("JSON Parse Error: #{e.message} - Response: #{response.body}")
+      []
+    rescue TypeError, NoMethodError => e
+      Rails.logger.error("Type Error: #{e.message} - Parsed Response: #{parsed_response.inspect}")
+      []
+    end
+  end
+
+
+  def self.get_airports(latitude,longitude, access_token)
+    url = "https://test.api.amadeus.com/v1/reference-data/locations/airports"
+
+    response = HTTParty.get(url, query: {
+      latitude: latitude,
+      longitude:longitude,
+      radius: 50
+    }, headers: {
+      "Authorization" => "Bearer #{access_token}"
+    })
+
+    # Log pentru debugging
+    # Rails.logger.info("Raw API Response: #{response.body}")
+
+    begin
+      parsed_response = JSON.parse(response.body)
+
+      # Verificăm dacă răspunsul este un Hash și are cheia "data"
+      if parsed_response.is_a?(Hash) && parsed_response.key?("data")
+        parsed_response["data"]
+      else
+        # Rails.logger.error("Unexpected API response format: #{parsed_response.inspect}")
+        []
+      end
+    rescue JSON::ParserError => e
+      # Rails.logger.error("JSON Parse Error: #{e.message} - Response: #{response.body}")
+      []
+    rescue TypeError, NoMethodError => e
+      # Rails.logger.error("Type Error: #{e.message} - Parsed Response: #{parsed_response.inspect}")
+      []
+    end
+  end
   
   end

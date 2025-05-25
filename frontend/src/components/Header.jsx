@@ -158,6 +158,46 @@ function Header({ user, setUser }) {
           </div>
         </li>
 
+        {showPersonalize && (
+          <aside className="personalize-aside">
+            <div className="theme-switch-wrapper">
+              <label className="theme-switch">
+                <input
+                  type="checkbox"
+                  onChange={(e) => {
+                    const isDark = e.target.checked;
+                    document.body.classList.toggle("dark-mode", isDark);
+                    localStorage.setItem("theme", isDark ? "dark" : "light");
+                  }}
+                  defaultChecked={localStorage.getItem("theme") === "dark"}
+                />
+                <span className="slider round"></span>
+              </label>
+              <span className="toggle-label">🌙 Dark Mode</span>
+            </div>
+
+                  
+            <div className="font-size-label">
+              <button className="small-font" onClick={() => {
+                document.documentElement.classList.remove("font-medium", "font-large");
+                document.documentElement.classList.add("font-small");
+              }}>A</button>
+
+              <button className="medium-font" onClick={() => {
+                document.documentElement.classList.remove("font-small", "font-large");
+                document.documentElement.classList.add("font-medium");
+              }}>A</button>
+
+              <button className="large-font" onClick={() => {
+                document.documentElement.classList.remove("font-small", "font-medium");
+                document.documentElement.classList.add("font-large");
+              }}>A</button>
+            </div>
+
+          </aside>
+        )}
+
+
       </ul>
     </header>
   );

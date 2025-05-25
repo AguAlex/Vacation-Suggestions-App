@@ -1,3 +1,20 @@
+/* Toate elementele vor moșteni font-size din body sau html */
+* {
+  font-size: inherit;
+}
+
+html.font-small, body.font-small {
+  font-size: 14px;
+}
+
+html.font-medium, body.font-medium {
+  font-size: 16px;
+}
+
+html.font-large, body.font-large {
+  font-size: 18px;
+}
+
 
 * {
   font-size: inherit;
