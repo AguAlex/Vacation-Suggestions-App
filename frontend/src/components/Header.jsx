@@ -41,9 +41,14 @@ function Header({ user, setUser }) {
   return (
     <header className={baseHeaderClass}>
       <ul className="flex items-center w-full gap-8 list-none m-0">
+        
         <li>
-          <Link to="/home" className={buttonClass}>
-            Home
+          <Link to="/home">
+            <img
+              src="icon.png"
+              alt="Logo"
+              className="h-10 w-auto transition-transform duration-300 ease-in-out hover:scale-125"
+            />
           </Link>
         </li>
         <li>
@@ -82,7 +87,7 @@ function Header({ user, setUser }) {
             </li>
             <li>
               <Link to="/map" className={buttonClass}>
-                Points of Interest Map
+                Map
               </Link>
             </li>
           </>
