@@ -16,6 +16,9 @@ import RecFav from "./components/RecFav";
 
 
 import "./global.css";
+import "./input.css";
+import "./output.css";
+import './fonts.css';
 
 function App() {
   const [user, setUser] = useState(() => {
