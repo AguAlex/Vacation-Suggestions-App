@@ -40,6 +40,10 @@ const MyLikes = () => {
         <div className="accommodation-list">
           {likedAccommodations.map((acc) => (
             <div key={acc.id} className="accommodation-card">
+              <img
+                src={acc.imagine}
+                alt={acc.name}
+                className="w-full h-32 object-cover"/>
               <h4>{acc.name}</h4>
               <p><strong>Price:</strong> {acc.price}</p>
               <p><strong>Rating:</strong> {acc.rating}</p>

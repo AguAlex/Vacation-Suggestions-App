@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     liked_accomodations = user.liked_accomodations.includes(city: :country)
   
     render json: liked_accomodations.as_json(
-      only: [:id, :name, :price, :rating, :link],
+      only: [:id, :name, :price, :rating, :link, :imagine],
       methods: [:likes_count],
       include: {
         city: {
