@@ -55,7 +55,7 @@ function Home({ user, setUser }) {
     1: us,
     2: france,
   };
-
+  
   return (
     <div className=" min-h-screen flex flex-col items-center">
       <div className="relative w-screen h-[80vh] overflow-hidden">
@@ -120,10 +120,11 @@ function Home({ user, setUser }) {
               onClick={() => window.open(acc.link, "_blank")}
               className="border-1 border-gray-100 cursor-pointer basis-1/3 transition-all duration-500 ease-in-out hover:basis-1/2 shadow-lg rounded-lg overflow-hidden"
             >
+              
               <img
-                src={images[index]}
+                src={acc.imagine}
                 alt={acc.name}
-                className="w-full h-32 object-cover"></img>
+                className="w-full h-32 object-cover"/>
               <div className="darkModeTop3 bg-white text-black shadow-md w-full p-4 flex flex-col items-start items-center">
                 <h4 className="text-xl font-semibold mb-2">{acc.name}</h4>
                 <div className="flex justify-evenly w-full">

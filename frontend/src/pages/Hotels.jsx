@@ -138,30 +138,47 @@ const Hotels = () => {
                     key={acc.id}
                     className="flex flex-col items-center justify-between bg-white border border-gray-300 rounded-xl p-6 shadow hover:-translate-y-1 transition-transform text-center"
                   >
+                    {/* Imaginea hotelului */}
+                    {acc.imagine && (
+                      <img  
+                        src={acc.imagine}
+                        alt={acc.name}
+                        className="w-full h-32 object-cover rounded-md mb-4"
+                      />
+                    )}
+
                     <h4 className="text-lg font-bold">{acc.name}</h4>
-                    <p>from <span className='font-bold'>&#8364;{acc.price}</span></p>
-                    <div className=" flex items-center">
+                    <p>
+                      from <span className="font-bold">&#8364;{acc.price}</span>
+                    </p>
+                    <div className="flex items-center">
                       {[1, 2, 3, 4, 5].map((i) => (
-                        <span key={i} className={i <= acc.rating ? "text-yellow-400" : "text-gray-300"}>
+                        <span
+                          key={i}
+                          className={i <= acc.rating ? "text-yellow-400" : "text-gray-300"}
+                        >
                           ★
                         </span>
                       ))}
                     </div>
                     <p>City: {acc.city_name}</p>
                     <p>Total Likes: {acc.likes_count}</p>
+
                     {localStorage.getItem("token") && (
                       <LikeButton
                         accomodationId={acc.id}
                         onLikeChange={refreshAccomodations}
                       />
                     )}
+
                     <button
-                      onClick={() => window.open(acc.link, '_blank')}
+                      onClick={() => window.open(acc.link, "_blank")}
                       className="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow"
                     >
                       Visit Hotel Website 🌐
                     </button>
                   </div>
+
                 ))
               )}
             </div>

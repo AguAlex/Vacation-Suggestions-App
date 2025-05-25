@@ -53,7 +53,7 @@ class AccomodationsController < ApplicationController
   # GET /top_accomodations
   def top_accomodations
     top_accommodations = Accomodation.joins(city: :country)
-                                    .select('accomodations.id, accomodations.name, accomodations.price, accomodations.rating, cities.name AS city_name, countries.name AS country_name, COUNT(likes.id) AS likes_count, accomodations.link AS link')
+                                    .select('accomodations.id, accomodations.name, accomodations.price, accomodations.rating, cities.name AS city_name, countries.name AS country_name, COUNT(likes.id) AS likes_count, accomodations.link AS link, accomodations.imagine AS imagine')
                                     .left_joins(:likes)
                                     .group('accomodations.id, cities.id, countries.id')
                                     .order('likes_count DESC')
