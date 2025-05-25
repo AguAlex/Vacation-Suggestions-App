@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./POIMap.css";
@@ -35,8 +35,21 @@ const POIMap = () => {
   const [airports, setAirports] = useState([]);
   const [selectedAirports, setSelectedAirports] = useState([]);
 
+  const handleAirportClick = (airport) => {
+    setSelectedAirports((prev) => {
+      if (prev.length === 0) {
+        return [airport];
+      } else if (prev.length === 1) {
+        // dacă dai click pe același aeroport îl ignorăm
+        if (prev[0].id === airport.id) return prev;
+        return [prev[0], airport];
+      } else {
+        // dacă sunt deja 2 aeroporturi, resetează la primul click nou
+        return [airport];
+      }
+    });
+  };
 
-  
 
 
   useEffect(() => {
@@ -102,6 +115,9 @@ const POIMap = () => {
             key={`airport-${idx}`}
             position={[airport.latitude, airport.longitude]}
             icon={airportIcon}
+            eventHandlers={{
+              click: () => handleAirportClick(airport),
+            }}
           >
             <Popup>
               <strong>{airport.name}</strong>
@@ -110,6 +126,22 @@ const POIMap = () => {
             </Popup>
           </Marker>
         ))}
+
+        {selectedAirports.length === 2 && (
+          <Polyline
+            positions={[
+              [selectedAirports[0].latitude, selectedAirports[0].longitude],
+              [selectedAirports[1].latitude, selectedAirports[1].longitude],
+            ]}
+            pathOptions={{
+              color: 'red',
+              dashArray: '10,10', // linie punctata
+              weight: 3,
+            }}
+          />
+        )}
+
+
 
         <MapLegend />
       </MapContainer>
