@@ -10,6 +10,7 @@
     "axios": "^1.9.0",
     "express": "^5.1.0",
     "leaflet": "^1.9.4",
+    "lucide-react": "^0.510.0",
     "pg": "^8.15.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -42,5 +43,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "css-loader": "^7.1.2",
+    "postcss": "^8.5.3",
+    "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^4.1.7"
   }
 }
