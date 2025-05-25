@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./RecFav.css";
+import { useNavigate, Link } from "react-router-dom";
 
 const RecFav = () => {
   const [recommendations, setRecommendations] = useState([]);
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -24,22 +25,43 @@ const RecFav = () => {
   }, []);
 
   return (
-    <div className="container">
-      <h1 className="heading">Recommended Based on Your Liked Hotels</h1>
+    <div className="px-5 py-10 max-w-6xl mx-auto flex flex-col gap-8">
+
+      <div className="flex items-center gap-4">
+        <h1 className="text-3xl text-gray-800 font-semibold font-myfont">
+          You might also like...
+        </h1>
+        <hr className="flex-1 border-1 border-emerald-500 rounded-full" />
+      </div>
+
+      
       {recommendations.length === 0 ? (
-        <p className="no-recommendations">No recommendations available.</p>
+        <p className="text-center text-lg text-gray-500">No recommendations available.</p>
       ) : (
-        <ul className="recommendations-list">
+        <ul className="flex flex-wrap justify-center gap-6 list-none p-0">
           {recommendations.map((item, index) => (
-            <li key={index} className="recommendation-item">
-              <div className="recommendation-name">{item.name}</div>
-              <div className="recommendation-location">
-                Location: Lat {item.geoCode?.latitude}, Long {item.geoCode?.longitude}
-              </div>
-            </li>
+            <Link
+              key={index}
+              to={`/hotels/${item.country_id}`}
+              className="flex-1 max-w-sm bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition duration-200 cursor-pointer"
+            >
+              <li className="flex flex-col justify-between h-full">
+                <div className="text-lg font-semibold text-gray-800 mb-2">{item.name}</div>
+                <div className="text-sm text-gray-600">
+                  Location: Lat {item.geoCode?.latitude}, Long {item.geoCode?.longitude}
+                </div>
+              </li>
+            </Link>
           ))}
         </ul>
       )}
+
+      <div className="flex items-center gap-4">
+        <hr className="flex-1 border-1 border-emerald-500 rounded-full" />
+        <h1 className="text-3xl text-gray-800 font-semibold font-myfont">
+          Check these out!
+        </h1>
+      </div>
     </div>
   );
 };

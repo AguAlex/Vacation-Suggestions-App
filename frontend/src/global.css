@@ -1,4 +1,4 @@
-/* Toate elementele vor moșteni font-size din body sau html */
+
 * {
   font-size: inherit;
 }
@@ -15,68 +15,31 @@ html.font-large, body.font-large {
   font-size: 18px;
 }
 
-
 body.dark-mode {
-    background-color: #6c424c;
-    color: #e0e0e0;
+    background-color: #082f49;
+    color: #f0f9ff;
   }
   
-  body.dark-mode .home-container,
-  body.dark-mode .login-container,
-  body.dark-mode .signup-container,
-  body.dark-mode .countries-page-container,
-  body.dark-mode .clusters-container,
-  body.dark-mode .header-scrolled,
-  body.dark-mode .header-other,
-  body.dark-mode .hotels-container,
-  body.dark-mode .city-item,
-  body.dark-mode .my-likes-container{
-    background-color: #6c424c;
+  body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode p {
+    color: #f0f9ff;
   }
 
-  body.dark-mode .accommodation-card,
-  body.dark-mode .not-logged-message,
-  body.dark-mode .selected-city-banner,
-  body.dark-mode .login-form-container,
-  body.dark-mode .signup-form-container,
-  body.dark-mode .likes-accommodation-card,
-  body.dark-mode .filters-sidebar{
-    background-color: #4b2f36;
-    border-color: #444;
-    color: #e0e0e0;
-  }
-
-  body.dark-mode .city-item.selected {
-    font-weight: bold;
-    color: #007bff;
-  }
-
-  body.dark-mode p{
-    color: #e0e0e0;
-  }
-
-  body.dark-mode .selected-city-banner p{
-    border-radius: 6px;
-    text-align: center;
-    color: #f7e4e9;
-  }
-  
-  body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 {
-    color: #f7e4e9;
-  }
-
-  body.dark-mode .mySlides::after{
+  body.dark-mode .slidesGradient{
     background: linear-gradient(
         to top,  
-        #6c424c 0%,  
+        #082f49 0%,  
         rgba(247, 228, 233, 0) 15%
       );
   }
 
-  body.dark-mode .message-text{
-    color: black;
+  body.dark-mode .darkMode{
+    background-color: #082f49;
+    color: #f0f9ff;
   }
-  
-  body.dark-mode .toggle-label {
-  color: #eee;
-}
+
+    body.dark-mode .darkModeTop3{
+    background-color: #104467;
+    color: #f0f9ff;
+  }
+
+

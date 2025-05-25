@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './Hotels.css';
 import LikeButton from '../components/LikeButton';
 
 const Hotels = () => {
@@ -50,22 +49,29 @@ const Hotels = () => {
   });
 
   return (
-    <div className="hotels-container">
-
-      <div className="hotels-content">
+    <div className="w-screen mx-auto pt-[70px] font-sans px-4">
+      <div className="flex">
         {showFilters && (
-          <aside className="filters-sidebar">
-            <div className="filters-title"><h3>Filters</h3></div>
+          <aside className="w-[250px] mr-8 bg-gray-100 p-4 rounded-lg border border-gray-300">
+            <div className="text-center mb-4">
+              <h3 className="text-xl font-semibold">Filters</h3>
+            </div>
 
-            <div className="filter-group">
-              <label>City</label>
-              <ul className="city-list">
+            <div className="mb-5">
+              <label className="font-bold block mb-1">City</label>
+              <ul className="flex flex-wrap gap-2 p-0">
                 {cities.map((city) => (
                   <li
                     key={city.id}
-                    className={`city-item ${selectedCity === city.name ? 'selected' : ''}`}
+                    className={`px-3 py-1 rounded cursor-pointer ${
+                      selectedCity === city.name
+                        ? 'bg-blue-600 text-white font-semibold'
+                        : 'bg-gray-200 text-black'
+                    }`}
                     onClick={() =>
-                      setSelectedCity((prevCity) => (prevCity === city.name ? null : city.name))
+                      setSelectedCity((prevCity) =>
+                        prevCity === city.name ? null : city.name
+                      )
                     }
                   >
                     {city.name}
@@ -74,66 +80,92 @@ const Hotels = () => {
               </ul>
             </div>
 
-            <div className="filter-group">
-              <label>Min Budget</label>
+            <div className="mb-5">
+              <label className="font-bold block mb-1">Min Budget</label>
               <input
                 type="number"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 placeholder="Min"
+                className="w-full p-2 rounded border border-gray-300"
               />
             </div>
 
-            <div className="filter-group">
-              <label>Max Budget</label>
+            <div className="mb-5">
+              <label className="font-bold block mb-1">Max Budget</label>
               <input
                 type="number"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 placeholder="Max"
+                className="w-full p-2 rounded border border-gray-300"
               />
             </div>
 
-            <button className="reset-button" onClick={handleResetFilters}>
+            <button
+              className="mt-4 w-full p-2 bg-red-600 text-white rounded hover:bg-red-700"
+              onClick={handleResetFilters}
+            >
               Reset Filters
             </button>
           </aside>
         )}
 
-        <section className="accommodations-section">
-          <div className="section-header">
-            <h3 className="section-title">Available hotels</h3>
-            <button className="toggle-filters-btn" onClick={() => setShowFilters(!showFilters)}>
-              <p>{showFilters ? 'Hide Filters' : 'Show Filters'}</p>
+        <section className="flex-1">
+          <div className="grid justify-center mb-4">
+            <h3 className="text-2xl font-semibold text-center mb-4">
+              Available hotels in {countryName}
+            </h3>
+            <button
+              className="mb-4 px-4 py-2 bg-black/20 text-black rounded w-fit mx-auto"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              {showFilters ? 'Hide Filters' : 'Show Filters'}
             </button>
           </div>
-          <div className="accommodation-grid">
-            {filteredAccomodations.length === 0 ? (
-              <p>No hotels available for selected filters.</p>
-            ) : (
-              filteredAccomodations.map((acc) => (
-                <div key={acc.id} className="accommodation-card">
-                  <h4>{acc.name}</h4>
-                  <p>Price: {acc.price}</p>
-                  <p>Rating: {acc.rating}</p>
-                  <p>City: {acc.city_name}</p>
-                  <p>Total Likes: {acc.likes_count}</p>
-                  {localStorage.getItem("token") ? (
-                    <LikeButton
-                      accomodationId={acc.id}
-                      onLikeChange={refreshAccomodations}
-                    />
-                  ) : null}
-                  <button
-                    onClick={() => window.open(acc.link, '_blank')}
-                    className="external-link-button"
+
+          {loading ? (
+            <div className="text-center mt-16 text-lg">Loading hotels...</div>
+          ) : (
+            <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
+              {filteredAccomodations.length === 0 ? (
+                <p className="text-center col-span-full">
+                  No hotels available for selected filters.
+                </p>
+              ) : (
+                filteredAccomodations.map((acc) => (
+                  <div
+                    key={acc.id}
+                    className="flex flex-col items-center justify-between bg-white border border-gray-300 rounded-xl p-6 shadow hover:-translate-y-1 transition-transform text-center"
                   >
-                    Visit Hotel Website 🌐
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
+                    <h4 className="text-lg font-bold">{acc.name}</h4>
+                    <p>from <span className='font-bold'>&#8364;{acc.price}</span></p>
+                    <div className=" flex items-center">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <span key={i} className={i <= acc.rating ? "text-yellow-400" : "text-gray-300"}>
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <p>City: {acc.city_name}</p>
+                    <p>Total Likes: {acc.likes_count}</p>
+                    {localStorage.getItem("token") && (
+                      <LikeButton
+                        accomodationId={acc.id}
+                        onLikeChange={refreshAccomodations}
+                      />
+                    )}
+                    <button
+                      onClick={() => window.open(acc.link, '_blank')}
+                      className="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow"
+                    >
+                      Visit Hotel Website 🌐
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </section>
       </div>
     </div>
