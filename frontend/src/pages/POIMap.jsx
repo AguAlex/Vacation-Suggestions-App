@@ -4,6 +4,8 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./POIMap.css";
 import MapLegend from "../components/MapLegend";
+import POIPopup from "./POIPopup";
+import { useNavigate } from "react-router-dom";
 
 // Marker galben pentru POI
 const poiIcon = new L.Icon({
@@ -34,6 +36,10 @@ const POIMap = () => {
   const [pois, setPois] = useState([]);
   const [airports, setAirports] = useState([]);
   const [selectedAirports, setSelectedAirports] = useState([]);
+  const [city1, setCity1] = useState("");
+  const [city2, setCity2] = useState("");
+  const [routes, setRoutes] = useState([]); // array de perechi de aeroporturi conectate
+
 
   const handleAirportClick = (airport) => {
     setSelectedAirports((prev) => {
@@ -50,6 +56,26 @@ const POIMap = () => {
     });
   };
 
+  const handleConnectCities = () => {
+    // Filtrăm aeroporturile după orașe (case insensitive)
+    const airportsCity1 = airports.filter(airport =>
+      airport.cityName?.toLowerCase() === city1.trim().toLowerCase()
+    );
+
+    const airportsCity2 = airports.filter(airport =>
+      airport.cityName?.toLowerCase() === city2.trim().toLowerCase()
+    );
+
+    // Construim toate perechile posibile între aeroporturile celor 2 orașe
+    let newRoutes = [];
+    airportsCity1.forEach(a1 => {
+      airportsCity2.forEach(a2 => {
+        newRoutes.push([a1, a2]);
+      });
+    });
+
+    setRoutes(newRoutes);
+  };
 
 
   useEffect(() => {
@@ -70,16 +96,17 @@ const POIMap = () => {
       })
       .catch((err) => console.error("Failed to load Airports:", err));
   }, []);
+  const navigate = useNavigate();
 
   return (
-    <div className="map-container" style={{ height: "85vh", width: "100%" }}>
+  <div className="map-wrapper">
       <MapContainer
         center={[40.71427, -74.00597]}
         zoom={3}
         minZoom={3}
         maxZoom={15}
         scrollWheelZoom={true}
-        style={{ height: "85vh", width: "100%" }}
+        className="leaflet-container"
         maxBounds={[
           [-85.05112878, -180],
           [85.05112878, 180],
@@ -90,10 +117,6 @@ const POIMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
           noWrap={true}
-          maxBounds={[
-            [-85.05112878, -180],
-            [85.05112878, 180],
-          ]}
         />
 
         {pois.map((poi, idx) => (
@@ -102,10 +125,8 @@ const POIMap = () => {
             position={[poi.latitude, poi.longitude]}
             icon={poiIcon}
           >
-            <Popup>
-              <strong>{poi.name}</strong>
-              <br />
-              {poi.description || "No description"}
+            <Popup maxWidth={240}>
+              <POIPopup poi={poi} />
             </Popup>
           </Marker>
         ))}
@@ -135,18 +156,58 @@ const POIMap = () => {
             ]}
             pathOptions={{
               color: 'red',
-              dashArray: '10,10', // linie punctata
+              dashArray: '10,10',
               weight: 3,
             }}
           />
         )}
 
-
+        {routes.map(([a1, a2], idx) => (
+          <Polyline
+            key={`route-${idx}`}
+            positions={[
+              [a1.latitude, a1.longitude],
+              [a2.latitude, a2.longitude],
+            ]}
+            pathOptions={{
+              color: 'blue',
+              dashArray: '8,6',
+              weight: 1,
+            }}
+          />
+        ))}
 
         <MapLegend />
       </MapContainer>
+
+      {/* FORMULAR CA OVERLAY PE HARTĂ */}
+      <div className="form-overlay">
+        <input
+          type="text"
+          placeholder="City 1"
+          value={city1}
+          onChange={(e) => setCity1(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="City 2"
+          value={city2}
+          onChange={(e) => setCity2(e.target.value)}
+        />
+        <button onClick={handleConnectCities}>Connect</button>
+
+        {/* 👇 Buton nou pentru Home */}
+        <button
+          onClick={() => navigate("/home")}
+          style={{ marginLeft: "1rem", backgroundColor: "#eee", padding: "0.3rem 0.6rem", borderRadius: "4px" }}
+        >
+          ⬅ Home
+        </button>
+      </div>
+
     </div>
   );
+
 };
 
 export default POIMap;
