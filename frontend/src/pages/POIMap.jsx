@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./POIMap.css";
-
+import MapLegend from "../components/MapLegend";
 
 // Marker galben pentru POI
 const poiIcon = new L.Icon({
@@ -33,28 +33,33 @@ L.Icon.Default.mergeOptions({
 const POIMap = () => {
   const [pois, setPois] = useState([]);
   const [airports, setAirports] = useState([]);
+  const [selectedAirports, setSelectedAirports] = useState([]);
+
+
+  
+
 
   useEffect(() => {
     fetch("http://localhost:3000/points_of_interests")
       .then((res) => res.json())
       .then((data) => {
-        console.log("POI data:", data); // Vezi exact ce e aici
+        console.log("POI data:", data); 
         setPois(data);
       })
       .catch((err) => console.error("Failed to load POIs:", err));
   }, []);
   useEffect(() => {
-    fetch("http://localhost:3000/api/airports") // Ai grijă ca backend-ul să expună aceste date
+    fetch("http://localhost:3000/api/airports")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Airport data:", data); // Vezi exact ce e aici
+        console.log("Airport data:", data);
         setAirports(data);
       })
       .catch((err) => console.error("Failed to load Airports:", err));
   }, []);
 
   return (
-    <div className="map-container">
+    <div className="map-container" style={{ height: "85vh", width: "100%" }}>
       <MapContainer
         center={[40.71427, -74.00597]}
         zoom={3}
@@ -68,7 +73,6 @@ const POIMap = () => {
         ]}
         maxBoundsViscosity={1}
       >
-
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
@@ -106,6 +110,8 @@ const POIMap = () => {
             </Popup>
           </Marker>
         ))}
+
+        <MapLegend />
       </MapContainer>
     </div>
   );

@@ -22,6 +22,7 @@
 
 /* Stilul pentru header */
 .header {
+  
   background-color: transparent; 
   display: flex;
   justify-content: space-between;
