@@ -5,13 +5,11 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Vacation from "./pages/Vacation";
-
 import POIMap from "./pages/POIMap";
 
 import "./App.css";
 import Hotels from "./pages/Hotels";
 import MyLikes from "./pages/MyLikes";
-
 import RecFav from "./components/RecFav";
 
 

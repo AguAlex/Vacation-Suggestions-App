@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
-import './Home';
-import image from '../assets/travel.png';
 
 const Login = () => {
   const [email, setEmail] = useState(""); 
@@ -13,74 +10,74 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const loginData = {
-      email, 
-      password, 
-    };
+    const loginData = { email, password };
 
     try {
       const response = await fetch("http://localhost:3000/sessions", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-      
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-
-        console.log("Data received from server:", data);
-        console.log("Storing user in localStorage:", data.user);
- 
         navigate('/home');  
       } else {
-        
-        console.log('Login failed:', data.message || 'Unknown error');
         setErrorMessage(data.message || 'Unknown error');
       }
     } catch (error) {
-      console.error('Error sending the request:', error);
       setErrorMessage('Error sending the request. Please try again.');
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
-        <h2>Welcome Back</h2>
-        <form onSubmit={handleLogin} className="login-form">
-          <input 
-            type="email" 
-            placeholder="Email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-          <button type="submit">Login</button>
+    <div className="relative min-h-screen font-sans flex justify-evenly pt-[70px]">
+      <div className="absolute inset-0 bg-cover bg-center z-0" style={{ backgroundImage: "url('/sssquiggly.svg')" }} />
 
-          {errorMessage && <div className="error-message">{errorMessage}</div>} 
+      <div class="max-w-md mx-auto h-[358px] my-20 relative rounded-lg bg-gradient-to-tr from-emerald-600 to-sky-300 p-0.5 shadow-lg">
+        <div className="darkMode max-w-[400px] p-10 bg-white shadow-lg rounded-lg z-10 text-center">
+          <h2 className="mb-5 text-gray-800 text-2xl font-semibold">Welcome Back</h2>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input 
+              type="email" 
+              placeholder="Email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
+              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-teal-300 transition"
+            />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required 
+              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-teal-300 transition"
+            />
+            <button 
+              type="submit" 
+              className="w-full p-3 bg-teal-300 text-white font-bold rounded-lg hover:bg-teal-400 transition"
+            >
+              Login
+            </button>
 
-          <p>
-            Don't have an account?{' '}
-            <span className="link" onClick={() => navigate('/signup')}>Sign up</span>
-          </p>
-        </form>
+            {errorMessage && <div className="text-red-500 text-sm mt-2">{errorMessage}</div>} 
+
+            <p className="mt-4 text-gray-500">
+              Don't have an account?{' '}
+              <span 
+                className="text-teal-400 cursor-pointer underline" 
+                onClick={() => navigate('/signup')}
+              >
+                Sign up
+              </span>
+            </p>
+          </form>
+        </div>
       </div>
-
-      <img className="login-image" src={image} alt="Image" />
-      
     </div>
   );
 };

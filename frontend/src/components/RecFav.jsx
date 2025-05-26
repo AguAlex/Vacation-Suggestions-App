@@ -24,6 +24,7 @@ const RecFav = () => {
       });
   }, []);
 
+
   return (
     <div className="px-5 py-10 max-w-6xl mx-auto flex flex-col gap-8">
 
@@ -41,12 +42,11 @@ const RecFav = () => {
         <ul className="flex flex-wrap justify-center gap-6 list-none p-0">
           {recommendations.map((item, index) => (
             <Link
-              key={index}
-              to={`/hotels/${item.country_id}`}
+              key={item.iataCode}
+              to={`/hotels/${item.country_id}?city=${encodeURIComponent(item.city_name)}`}
               className="flex-1 max-w-sm bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition duration-200 cursor-pointer"
             >
               <li className="flex flex-col justify-between h-full">
-                
                 {item.country_image && (
                   <div className="w-full aspect-video overflow-hidden rounded-md mb-4">
                     <img

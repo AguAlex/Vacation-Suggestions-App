@@ -8,6 +8,7 @@ function Vacation() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 5;
+  const [accomodations, setAccomodations] = useState([]);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -52,12 +53,38 @@ function Vacation() {
     }
   }, [searchTerm, countries]);
 
+  useEffect(() => {
+    const fetchAccomodations = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/accomodations");
+        if (!response.ok) throw new Error("Failed to fetch accomodations");
+        const data = await response.json();
+        setAccomodations(data);
+      } catch (error) {
+        console.error("Error fetching accomodations:", error);
+      }
+    };
+
+    fetchAccomodations();
+  }, []);
+
+
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
   const currentCountries = filteredCountries.slice(indexOfFirstCountry, indexOfLastCountry);
   const totalPages = Math.ceil(filteredCountries.length / countriesPerPage);
 
-  const usaCities = cities.filter(city => city.country === "UnitedStates" || city.country === "United States");
+  const usaCities = cities.filter(city =>
+  city.country?.name === "United States" || city.country?.name === "UnitedStates"
+  );
+
+  const citiesWithPropertyCount = usaCities.map(city => {
+    const count = accomodations.filter(acc => acc.city_id === city.id).length;
+    return {
+      ...city,
+      propertyCount: count,
+    };
+  });
 
   return (
     <div className="flex flex-col items-center w-full pt-20 min-h-screen px-4">
@@ -72,26 +99,13 @@ function Vacation() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-white placeholder:text-slate-400 text-slate-700 text-sm border border-slate-300 rounded-md pl-3 pr-28 py-2 transition duration-300 ease-in-out focus:outline-none focus:border-slate-500 hover:border-slate-400 shadow-sm"
           />
-          {/* <button
-            type="button"
-            className="shadow-2xl absolute top-1 right-1 flex items-center rounded bg-slate-800 py-1 px-2.5 text-sm text-white hover:bg-slate-700 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-2" viewBox="0 0 24 24">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
-              />
-            </svg>
-            Search
-          </button> */}
         </div>
       </div>
 
       <div className="flex w-full flex-col items-center justify-center gap-6">
         <div className="w-full flex flex-col items-center justify-center gap-2">
           <hr className="border-1 ml-[25vw] w-[70vw] border-emerald-500 rounded-full" />
-          <h2 className="font-myfont text-semibold text-4xl">Trending destinations</h2>
+          <h2 className="font-myfont text-semibold text-4xl">Our destinations</h2>
           <hr className="border-1 mr-[25vw] w-[70vw] border-emerald-500 rounded-full" />
         </div>
 
@@ -140,33 +154,32 @@ function Vacation() {
         )}
       </div>
 
-      <hr className="border-1 border-gray-500 rounded-full w-[100vw] mt-10" />
-
-      <div className="w-full flex gap-4 mt-10">
+      <div className="w-full grid gap-4 mt-10">
         <h1 className="text-3xl text-black ml-20 font-myfont">Explore the USA!</h1>
-<div className="flex flex-wrap justify-center gap-6">
-          {usaCities.length > 0 ? (
-            usaCities.slice(0, 6).map((city) => (
-              <Link
-                key={city.id}
-                to={`/hotels/${city.id}`}
-                className="bg-white rounded-xl w-[160px] sm:w-[180px] md:w-[200px] p-4 text-center text-gray-800 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
-              >
-                <h3 className="text-lg font-semibold mb-2">{city.name}</h3>
-                <img
-                  src={`images/${city.name}.jpg`}
-                  alt={city.name}
-                  className="w-full h-32 object-cover rounded-lg"
-                />
-              </Link>
-            ))
-          ) : (
-            <p className="text-gray-600">No cities from the USA found.</p>
-          )}
+        <div className="flex flex-wrap justify-center gap-6 p-7">
+            {usaCities.length > 0 ? (
+              citiesWithPropertyCount.slice(0, 5).map((city) => (
+                <Link
+                  key={city.id}
+                  to={`/hotels/${city.country?.id}?city=${encodeURIComponent(city.name)}`}
+                  className="darkModeTop3 rounded-xl w-[160px] sm:w-[180px] md:w-[200px] p-4 text-center text-gray-800 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+                >
+                  <h3 className="text-lg font-semibold mb-2">{city.name}</h3>
+                  <p>{city.propertyCount} properties</p>
+                  {/* <img
+                    src={`images/${city.name}.jpg`}
+                    alt={city.name}
+                    className="w-full h-32 object-cover rounded-lg"
+                  /> */}
+                </Link>
+              ))
+            ) : (
+              <p className="text-gray-600">No cities from the USA found.</p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 export default Vacation;

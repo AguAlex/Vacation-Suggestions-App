@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Settings } from "lucide-react";
+import logo from "../assets/icon.png"; 
 
 function Header({ user, setUser }) {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === "/home";
+  const isLoginPage = location.pathname === "/login";
+  const isSignupPage = location.pathname === "/signup";
   const [showPersonalize, setShowPersonalize] = useState(false);
 
   const [activeFont, setActiveFont] = React.useState(() => {
@@ -29,12 +32,17 @@ function Header({ user, setUser }) {
   };
 
   const isScrolled = scrolled || !isHomePage;
+  const isLoginOrSignup = isLoginPage || isSignupPage;
   const baseHeaderClass = `w-full fixed top-0 z-50 flex justify-between items-center transition-colors duration-300 px-8 py-4 ${
-    isScrolled ? "darkMode bg-sky-50" : "bg-transparent"
-  }`;
+  isLoginOrSignup 
+    ? "bg-transparent" 
+    : isScrolled 
+      ? "darkMode bg-sky-50" 
+      : "bg-transparent"
+}`;
 
-  const buttonClass = `bg-transparent border-none font-medium text-base px-4 py-2 rounded-md hover:scale-105 hover:text-sky-500 transition ${
-    isScrolled ? "darkMode text-black" : "text-white"
+  const buttonClass = `darkModeButtons bg-transparent border-none font-medium text-base px-4 py-2 rounded-md hover:scale-105 hover:text-sky-500 transition ${
+    isScrolled ? "text-black" : "text-white"
   }`;
 
 
@@ -45,7 +53,7 @@ function Header({ user, setUser }) {
         <li>
           <Link to="/home">
             <img
-              src="icon.png"
+              src={logo}
               alt="Logo"
               className="h-10 w-auto transition-transform duration-300 ease-in-out hover:scale-125"
             />
@@ -162,47 +170,6 @@ function Header({ user, setUser }) {
             </div>
           </div>
         </li>
-
-        {showPersonalize && (
-          <aside className="personalize-aside">
-            <div className="theme-switch-wrapper">
-              <label className="theme-switch">
-                <input
-                  type="checkbox"
-                  onChange={(e) => {
-                    const isDark = e.target.checked;
-                    document.body.classList.toggle("dark-mode", isDark);
-                    localStorage.setItem("theme", isDark ? "dark" : "light");
-                  }}
-                  defaultChecked={localStorage.getItem("theme") === "dark"}
-                />
-                <span className="slider round"></span>
-              </label>
-              <span className="toggle-label">🌙 Dark Mode</span>
-            </div>
-
-                  
-            <div className="font-size-label">
-              <button className="small-font" onClick={() => {
-                document.documentElement.classList.remove("font-medium", "font-large");
-                document.documentElement.classList.add("font-small");
-              }}>A</button>
-
-              <button className="medium-font" onClick={() => {
-                document.documentElement.classList.remove("font-small", "font-large");
-                document.documentElement.classList.add("font-medium");
-              }}>A</button>
-
-              <button className="large-font" onClick={() => {
-                document.documentElement.classList.remove("font-small", "font-medium");
-                document.documentElement.classList.add("font-large");
-              }}>A</button>
-            </div>
-
-          </aside>
-        )}
-
-
       </ul>
     </header>
   );

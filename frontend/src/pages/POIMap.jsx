@@ -181,15 +181,17 @@ const POIMap = () => {
       </MapContainer>
 
       {/* FORMULAR CA OVERLAY PE HARTĂ */}
-      <div className="form-overlay">
+      <div className="darkMode form-overlay">
         <input
           type="text"
+          className="darkModeTop3 p-1 rounded-lg"
           placeholder="City 1"
           value={city1}
           onChange={(e) => setCity1(e.target.value)}
         />
         <input
           type="text"
+          className="darkModeTop3 p-1 rounded-lg"
           placeholder="City 2"
           value={city2}
           onChange={(e) => setCity2(e.target.value)}
@@ -198,8 +200,8 @@ const POIMap = () => {
 
         {/* 👇 Buton nou pentru Home */}
         <button
+          className="ml-6 bg-grax-100 p-[0.3rem_0.6rem] darkModeTop3 rounded-lg"
           onClick={() => navigate("/home")}
-          style={{ marginLeft: "1rem", backgroundColor: "#eee", padding: "0.3rem 0.6rem", borderRadius: "4px" }}
         >
           ⬅ Home
         </button>
