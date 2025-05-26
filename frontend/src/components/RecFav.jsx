@@ -46,7 +46,19 @@ const RecFav = () => {
               className="flex-1 max-w-sm bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition duration-200 cursor-pointer"
             >
               <li className="flex flex-col justify-between h-full">
+                
+                {item.country_image && (
+                  <div className="w-full aspect-video overflow-hidden rounded-md mb-4">
+                    <img
+                      src={`/images/${item.country_name.toLowerCase()}.png`}
+                       alt={item.country_name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+
                 <div className="text-lg font-semibold text-gray-800 mb-2">{item.name}</div>
+
                 <div className="text-sm text-gray-600">
                   Location: Lat {item.geoCode?.latitude}, Long {item.geoCode?.longitude}
                 </div>
@@ -54,6 +66,7 @@ const RecFav = () => {
             </Link>
           ))}
         </ul>
+
       )}
 
       <div className="flex items-center gap-4">
