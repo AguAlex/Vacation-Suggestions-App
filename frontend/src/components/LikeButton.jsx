@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const LikeButton = ({ accomodationId, onLikeChange }) => {
+const LikeButton = ({ accomodationId, onLikeChange, className = "" }) => {
   const userId = JSON.parse(localStorage.getItem("user"))?.id;
   const [liked, setLiked] = useState(false);
 
@@ -30,8 +30,10 @@ const LikeButton = ({ accomodationId, onLikeChange }) => {
         ${liked
           ? "bg-red-200 text-red-800 hover:bg-red-300"
           : "bg-gray-100 text-gray-800 hover:bg-pink-100"}
+          ${className}
       `}
       onClick={handleLike}
+      
     >
       {liked ? (
         <svg

@@ -1,20 +1,10 @@
-/* Toate elementele vor moșteni font-size din body sau html */
-* {
-  font-size: inherit;
-}
 
-html.font-small, body.font-small {
-  font-size: 14px;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  background-color: #f0f9ff;
+  margin: 0;
 }
-
-html.font-medium, body.font-medium {
-  font-size: 16px;
-}
-
-html.font-large, body.font-large {
-  font-size: 18px;
-}
-
 
 * {
   font-size: inherit;
@@ -54,9 +44,14 @@ body.dark-mode {
     color: #f0f9ff;
   }
 
+    body.dark-mode .darkModeButtons{
+    color: #f0f9ff;
+  }
+
     body.dark-mode .darkModeTop3{
     background-color: #104467;
     color: #f0f9ff;
   }
+
 
 

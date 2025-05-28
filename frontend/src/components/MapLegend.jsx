@@ -11,12 +11,7 @@ const MapLegend = () => {
     const legend = L.control({ position: "topright" });
 
     legend.onAdd = function () {
-      const div = L.DomUtil.create("div", "info legend bg-white p-2 rounded shadow-md");
-      div.style.background = "white";
-      div.style.padding = "8px";
-      div.style.borderRadius = "8px";
-      div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
-      div.style.fontSize = "14px";
+      const div = L.DomUtil.create("div", "darkMode info bg-white legend p-6 rounded-lg text-[14px] shadow-md");
       div.innerHTML = `
         <h4 style="margin:0 0 8px 0; font-weight:bold;">Legenda</h4>
         <div style="display:flex; align-items:center; margin-bottom:4px;">

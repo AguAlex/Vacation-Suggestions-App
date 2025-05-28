@@ -12,7 +12,12 @@ class CitiesController < ApplicationController
     cities = City.all
     end
 
-  render json: cities # Returnează orașele ca JSON
+  render json: cities.as_json(
+    only: [:id, :name, :country_id],
+    include: {
+      country: { only: [:name, :id] }
+    }
+  )
   end
 
   # GET /cities/1

@@ -29,7 +29,9 @@ class RecommendedController < ApplicationController
         item.merge(
           "country_name" => country.name,
           "country_id" => country.id,
-          "country_image" => country.image
+          "country_image" => country.image,
+          "city_id" => local_city.id,
+          "city_name" => local_city.name
         )
       else
         item
