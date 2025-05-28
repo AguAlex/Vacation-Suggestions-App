@@ -1,0 +1,40 @@
+{
+  "name": "nextjs-f1gpt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "seed": "ts-node ./scripts/loadDB.ts",
+    "database": "ts-node ./scripts/neonDB.ts",
+    "poi": "ts-node ./scripts/poiDB.ts",
+    "airports": "ts-node ./scripts/airportsDB.ts",
+    "cities": "ts-node ./scripts/citiesDB.ts",
+    "query": "ts-node ./scripts/queryDB.ts",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@datastax/astra-db-ts": "^1.5.0",
+    "@huggingface/inference": "^2.8.1",
+    "dotenv": "^16.5.0",
+    "groq-sdk": "^0.22.0",
+    "langchain": "^0.1.36",
+    "next": "15.3.2",
+    "openai": "^4.103.0",
+    "pg": "^8.16.0",
+    "puppeteer": "^19.11.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "typescript": "^5"
+  }
+}
