@@ -72,6 +72,8 @@ To run all tests:
 bundle exec rspec
 ```
 
+![Teste](images/teste.png)
+
 ## 🧑‍💻 Coding Standards
 
 In this project, Ruby on Rails coding conventions and best practices have been strictly followed to ensure clean, maintainable, and readable code. Some specific standards and practices include:
@@ -151,9 +153,7 @@ class SessionsController < ApplicationController
     JWT.encode(payload, Rails.application.secret_key_base)
   end
 end
-
-
-## Coding Standards
+```
 
 ## 💡 Prompt Engineering
 
@@ -216,4 +216,7 @@ Prompt engineering proved critical for:
 This multi-agent approach significantly reduced the time required to develop, test, and debug core features of the Rails application.
 
 ---
+
+```
+
 ```
