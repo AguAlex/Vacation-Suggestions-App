@@ -94,7 +94,7 @@ function Vacation() {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search for a city or country..."
+            placeholder="Search for a country..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-white placeholder:text-slate-400 text-slate-700 text-sm border border-slate-300 rounded-md pl-3 pr-28 py-2 transition duration-300 ease-in-out focus:outline-none focus:border-slate-500 hover:border-slate-400 shadow-sm"

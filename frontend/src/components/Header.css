@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+    .small-button {
+        font-size: 0.9rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .small-button {
+        font-size: 0.8rem !important;
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+    }
+
+    .small-settings{
+        margin-right: 10px !important;
+    }
+
+    .small-header{
+        padding-left: 0.1rem !important;
+    }
+}

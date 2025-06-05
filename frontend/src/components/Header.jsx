@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Settings } from "lucide-react";
 import logo from "../assets/icon.png"; 
+import "./Header.css";
 
 function Header({ user, setUser }) {
   const [scrolled, setScrolled] = useState(false);
@@ -33,7 +34,7 @@ function Header({ user, setUser }) {
 
   const isScrolled = scrolled || !isHomePage;
   const isLoginOrSignup = isLoginPage || isSignupPage;
-  const baseHeaderClass = `w-full fixed top-0 z-50 flex justify-between items-center transition-colors duration-300 px-8 py-4 ${
+  const baseHeaderClass = `small-header w-full fixed top-0 z-50 flex justify-between items-center transition-colors duration-300 px-8 py-4 ${
   isLoginOrSignup 
     ? "bg-transparent" 
     : isScrolled 
@@ -41,7 +42,7 @@ function Header({ user, setUser }) {
       : "bg-transparent"
 }`;
 
-  const buttonClass = `darkModeButtons bg-transparent border-none font-medium text-base px-4 py-2 rounded-md hover:scale-105 hover:text-sky-500 transition ${
+  const buttonClass = `small-button darkModeButtons bg-transparent border-none font-medium text-base px-4 py-2 rounded-md hover:scale-105 hover:text-sky-500 transition ${
     isScrolled ? "text-black" : "text-white"
   }`;
 
@@ -50,7 +51,7 @@ function Header({ user, setUser }) {
     <header className={baseHeaderClass}>
       <ul className="flex items-center w-full gap-8 list-none m-0">
         
-        <li>
+        <li className="flex-shrink-0">
           <Link to="/home">
             <img
               src={logo}
@@ -101,7 +102,7 @@ function Header({ user, setUser }) {
           </>
         )}
         
-        <li className="ml-auto relative inline-block text-left">
+        <li className="small-settings ml-auto relative inline-block text-left">
           <button
             type="button"
             onClick={() => setShowPersonalize(!showPersonalize)}

@@ -1,0 +1,36 @@
+/* RESPONSIVE STYLING FOR MAP LEGEND */
+@media (max-width: 1100px) {
+  .legend {
+    font-size: 13px !important;
+    padding: 0.75rem !important;
+    max-width: 160px;
+  }
+
+  .legend h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .legend div {
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 620px) {
+  .legend {
+    font-size: 12px !important;
+    padding: 0.5rem !important;
+    max-width: 140px;
+    top: none !important;
+  }
+
+  .legend h4 {
+    font-size: 13px;
+  }
+
+  .legend img {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 6px !important;
+  }
+}
