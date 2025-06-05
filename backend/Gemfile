@@ -48,11 +48,12 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 
 gem "rack-cors"
-gem "jbuilder"  # pentru a crea răspunsuri JSON
+gem "jbuilder"
 gem "jwt"
 gem "bcrypt", "~> 3.1.7"
 gem "dotenv", "~> 3.1"
