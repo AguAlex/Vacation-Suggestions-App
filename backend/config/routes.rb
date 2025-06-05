@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post 'sessions', to: 'sessions#create'   # Ruta pentru login
   delete 'sessions', to: 'sessions#destroy' # Ruta pentru logout (opțional pentru JWT)
+  post '/sessions', to: 'sessions#create'
+  post '/sessions/google', to: 'sessions#google'
   namespace :api do
     post 'chat', to: 'chat#create'
   end
