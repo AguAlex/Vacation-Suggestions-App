@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Home.css";
+
 
 import uk from "../assets/UnitedKingdom.jpg";
 import france from "../assets/France.jpg";
@@ -62,15 +64,16 @@ function Home({ user, setUser }) {
         {countries.map((country, index) => (
           <div
             key={country.id}
-            className={`absolute inset-0 flex justify-center items-center duration-500 ${
+            className={`home-slide-img top-0 absolute inset-0 flex justify-center items-center duration-500 ${
               index === slideIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            <img
-              src={images[index]}
-              alt={country.name}
-              className="w-full h-[50vw] object-cover"
-            />
+              <img
+                src={images[index]}
+                alt={country.name}
+                className="home-slide-img w-full h-full object-cover"
+              />
+
             <div className="slidesGradient bg-[linear-gradient(to_top,_#f0f9ff_0%,_rgba(247,228,233,0)_15%)] absolute inset-0 pointer-events-none"></div>
           </div>
         ))}
@@ -79,19 +82,19 @@ function Home({ user, setUser }) {
       <br />
       {user ? (
         <div className="flex gap-10 items-center justify-center mt-10">
-          <div className="mt-6 w-8 h-8 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
-          <div className="mt-6 w-16 h-16 bg-gradient-to-r from-emerald-600 to-sky-400 rounded-full"></div>
-          <div className="mt-6 w-32 h-32 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
-          <div className="font-myfont p-10 text-center mt-6 w-100 h-100 bg-gradient-to-r from-emerald-600 to-sky-400 rounded-full">
+          <div className="circle-decoration mt-6 w-8 h-8 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
+          <div className="circle-decoration mt-6 w-16 h-16 bg-gradient-to-r from-emerald-600 to-sky-400 rounded-full"></div>
+          <div className="circle-decoration mt-6 w-32 h-32 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
+          <div className="welcome-user font-myfont p-10 text-center mt-6 w-100 h-100 bg-gradient-to-r from-emerald-600 to-sky-400 rounded-full">
             <h1 className="text-4xl text-sky-50">Hello, {user.nume}!</h1>
             <p className="text-lg text-sky-50 mt-2">
               Welcome back to the Vacation Suggestion App! 
             </p>
             <p className="text-lg text-sky-50">We missed you! Start exploring your favorite destinations! </p>
           </div>
-          <div className="mt-6 w-32 h-32 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
-          <div className="mt-6 w-16 h-16 bg-gradient-to-r from-emerald-600 to-sky-400 rounded-full"></div>
-          <div className="mt-6 w-8 h-8 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
+          <div className="circle-decoration mt-6 w-32 h-32 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
+          <div className="circle-decoration mt-6 w-16 h-16 bg-gradient-to-r from-emerald-600 to-sky-400 rounded-full"></div>
+          <div className="circle-decoration mt-6 w-8 h-8 bg-gradient-to-r to-emerald-600 from-sky-400 rounded-full"></div>
         </div>
       ) : (
         <div className="font-myfont border-4 p-6 mt-6 rounded-xl w-4/5 text-center text-gray-800">
@@ -109,23 +112,23 @@ function Home({ user, setUser }) {
       )}
       <br />
       <div className="w-screen px-5 mt-10 text-center">
-        <h2 class="mb-4 text-2xl font-extrabold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
+        <h2 class="top3-title mb-4 text-2xl font-extrabold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
           <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Top 3 Hotels based on likes</span>
         </h2>
         
-        <div className="flex w-full gap-4 border-t-2 border-b-2 border-gray-300 p-4">
+        <div className="top3-container flex w-full gap-4 border-t-2 border-b-2 border-gray-300 p-4">
           {topAccomodations.map((acc, index) => (
             <div
               key={acc.id}
               onClick={() => window.open(acc.link, "_blank")}
-              className="border-1 border-gray-100 cursor-pointer basis-1/3 transition-all duration-500 ease-in-out hover:basis-1/2 shadow-lg rounded-lg overflow-hidden"
+              className="top3-card border-1 border-gray-100 cursor-pointer basis-1/3 transition-all duration-500 ease-in-out hover:basis-1/2 shadow-lg rounded-lg overflow-hidden"
             >
               
               <img
                 src={acc.imagine}
                 alt={acc.name}
                 className="w-full h-32 object-cover"/>
-              <div className="darkModeTop3 bg-white text-black shadow-md w-full p-4 flex flex-col items-start items-center">
+              <div className="top3-name darkModeTop3 bg-white text-black shadow-md w-full h-full p-4 flex flex-col items-start items-center">
                 <h4 className="text-xl font-semibold mb-2">{acc.name}</h4>
                 <div className="flex justify-evenly w-full">
                   <div className="flex items-center">

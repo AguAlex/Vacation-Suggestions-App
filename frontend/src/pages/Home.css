@@ -1,0 +1,56 @@
+/* Slide image height on smaller screens */
+@media (max-width: 768px) {
+  .home-slide-img {
+    height: 100% !important;
+  }
+
+  .welcome-container {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .top3-container {
+    flex-direction: column !important;
+  }
+
+  .top3-card {
+    flex-basis: 100% !important;
+  }
+
+  .top3-card img {
+    height: 150px !important;
+  }
+
+  .top3-name{
+    font-size: medium !important;
+  }
+
+  .circle-decoration {
+    display: none;
+  }
+
+  .welcome-user {
+    width: 90%;
+    height: auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .top3-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-user h1 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-user p {
+    font-size: 1rem;
+  }
+
+  .top3-title {
+    font-size: 1.2rem;
+  }
+}
