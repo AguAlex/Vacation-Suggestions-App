@@ -55,7 +55,7 @@ const ChatBot = () => {
 
       if (cityIds.length > 0) {
         const poiResponse = await fetch(
-          `http://localhost:3000/points_of_interests?city_id=${cityIds}`
+          `http://localhost:3000/points_of_interests?city_id=${cityIds}`  
         );
         const poiData = await poiResponse.json();
         setPoiData(poiData);
@@ -86,41 +86,41 @@ const ChatBot = () => {
     typeBotMessage(welcomeText, "vacations");
   };
 
-  const handleNewChatGPT = async () => {
-    setActiveChat("chatGPT");
-  
-    const userPrompt = `Hello! My name is ${storedUser?.nume || "user"} and from now on you will address me as ${storedUser?.nume || "user"}. Hello!`;
-  
-    try {
-      const response = await fetch("http://localhost:3000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userPrompt }),
-      });
-  
-      const data = await response.json();
-      typeBotMessage(data.response, "chatGPT");
-    } catch (error) {
-      console.error("Error:", error);
-      typeBotMessage("Sorry, something went wrong. 😓", "chatGPT");
-    }
-  };
+ const handleNewChatGPT = async () => {
+  setActiveChat("chatGPT");
 
-  const handleChatGPTMessage = async (messageText) => {
-    try {
-      const response = await fetch("http://localhost:3000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: messageText }),
-      });
+  const userPrompt = `Hello! My name is ${storedUser?.nume || "user"} and from now on you will address me as ${storedUser?.nume || "user"}. Hello!`;
 
-      const data = await response.json();
-      typeBotMessage(data.response, "chatGPT");
-    } catch (error) {
-      console.error("Error:", error);
-      typeBotMessage("Sorry, something went wrong. 😓", "chatGPT");
-    }
-  };
+  try {
+    const response = await fetch("http://localhost:5001/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userPrompt }),  // userPrompt aici
+    });
+
+    const data = await response.json();
+    typeBotMessage(data.response, "chatGPT"); // raspunsul din backend este in campul "response"
+  } catch (error) {
+    console.error("Error:", error);
+    typeBotMessage("Sorry, something went wrong. 😓", "chatGPT");
+  }
+};
+
+const handleChatGPTMessage = async (messageText) => {
+  try {
+    const response = await fetch("http://localhost:5001/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userPrompt: messageText }),  // userPrompt aici
+    });
+
+    const data = await response.json();
+    typeBotMessage(data.response, "chatGPT");
+  } catch (error) {
+    console.error("Error:", error);
+    typeBotMessage("Sorry, something went wrong. 😓", "chatGPT");
+  }
+};
 
   const handleSendMessage = async () => {
     if (input.trim() === "") return;
