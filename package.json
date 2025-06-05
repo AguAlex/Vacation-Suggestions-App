@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@datastax/astra-db-ts": "^2.0.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "langchain": "^0.3.27",
+    "lucide-react": "^0.511.0",
+    "openai": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "ts-node": "^10.9.2"
+  }
+}
