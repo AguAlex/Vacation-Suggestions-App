@@ -72,7 +72,7 @@ To run all tests:
 bundle exec rspec
 ```
 
-![Teste](images/teste.png)
+![Teste](images/teste.PNG)
 
 ## 🧑‍💻 Coding Standards
 
