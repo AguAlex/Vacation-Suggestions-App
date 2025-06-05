@@ -15,6 +15,8 @@ function Home({ user, setUser }) {
   const [countries, setCountries] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
   const [topAccomodations, setTopAccomodations] = useState([]);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -59,7 +61,8 @@ function Home({ user, setUser }) {
   };
   
   return (
-    <div className=" min-h-screen flex flex-col items-center">
+    <div>
+    <div className={`min-h-screen flex flex-col items-center ${isChatOpen ? "blur-sm" : ""}`}>
       <div className="relative w-screen h-[80vh] overflow-hidden">
         {countries.map((country, index) => (
           <div
@@ -149,9 +152,11 @@ function Home({ user, setUser }) {
 
       </div>
 
-      {user && <ChatBot />}
+      
       <br />
       {user && <RecFav />}
+    </div>
+    {user && <ChatBot setIsChatOpen={setIsChatOpen} />}
     </div>
   );
 }
