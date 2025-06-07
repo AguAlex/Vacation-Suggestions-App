@@ -81,8 +81,8 @@ const Signup = () => {
       
       <div className="absolute inset-0 bg-cover bg-center z-0" style={{ backgroundImage: "url('/sssquiggly.svg')" }} />
       
-      <div className="max-w-md mx-auto h-[480px] my-20 relative rounded-lg bg-gradient-to-tr from-emerald-600 to-sky-300 p-0.5 shadow-lg">
-        <div className="darkMode max-w-md w-full bg-white shadow-lg rounded-lg p-10 text-center z-50">
+      <div className="max-w-md mx-auto h-[484px] my-20 relative rounded-lg bg-gradient-to-tr from-emerald-600 to-sky-300 p-0.5 shadow-lg">
+        <div className="darkMode max-w-md h-[480px] w-full bg-white shadow-lg rounded-lg p-10 text-center z-50">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Create an Account</h2>
           <form onSubmit={handleSignup} className="space-y-4">
             <input
@@ -91,7 +91,7 @@ const Signup = () => {
               value={nume}
               onChange={(e) => setNume(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-300"
             />
             <input
               type="email"
@@ -99,7 +99,7 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-300"
             />
             <input
               type="password"
@@ -107,11 +107,11 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-300"
             />
             <button
               type="submit"
-              className="w-full py-3 bg-orange-300 text-white font-bold rounded-lg hover:bg-orange-400 transition duration-300"
+              className="w-full py-3 bg-emerald-300 text-white font-bold rounded-lg hover:bg-emerald-400 transition duration-300"
             >
               Sign Up
             </button>
@@ -131,7 +131,7 @@ const Signup = () => {
               Already have an account?{' '}
               <span
                 onClick={() => navigate('/login')}
-                className="text-orange-400 cursor-pointer underline hover:text-orange-500"
+                className="text-emerald-400 cursor-pointer underline hover:text-emerald-500"
               >
                 Login
               </span>

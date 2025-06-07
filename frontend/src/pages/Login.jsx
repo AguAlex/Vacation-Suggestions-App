@@ -73,8 +73,8 @@ const Login = () => {
     <div className="relative min-h-screen font-sans flex justify-evenly pt-[70px]">
       <div className="absolute inset-0 bg-cover bg-center z-0" style={{ backgroundImage: "url('/sssquiggly.svg')" }} />
 
-      <div className="max-w-md mx-auto h-[420px] my-20 relative rounded-lg bg-gradient-to-tr from-emerald-600 to-sky-300 p-0.5 shadow-lg">
-        <div className="darkMode max-w-[400px] p-10 bg-white shadow-lg rounded-lg z-10 text-center">
+      <div className="max-w-md mx-auto h-[450px] my-20 relative rounded-lg bg-gradient-to-tr from-emerald-600 to-emerald-300 p-0.5 shadow-lg">
+        <div className="darkMode max-w-[400px] h-[446px] p-10 bg-white shadow-lg rounded-lg z-10 text-center">
           <h2 className="mb-5 text-gray-800 text-2xl font-semibold">Welcome Back</h2>
           <form onSubmit={handleLogin} className="space-y-4">
             <input 
@@ -95,7 +95,7 @@ const Login = () => {
             />
             <button 
               type="submit" 
-              className="w-full p-3 bg-teal-300 text-white font-bold rounded-lg hover:bg-teal-400 transition"
+              className="w-full p-3 bg-emerald-300 text-white font-bold rounded-lg hover:bg-emerald-400 transition"
             >
               Login
             </button>

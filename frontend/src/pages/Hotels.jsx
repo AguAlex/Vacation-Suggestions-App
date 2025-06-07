@@ -17,6 +17,7 @@ const Hotels = () => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [showFilters, setShowFilters] = useState(false);
+  const [minRating, setMinRating] = useState('');
 
   const fetchData = async () => {
     try {
@@ -51,13 +52,15 @@ const Hotels = () => {
     setSelectedCity(null);
     setMinPrice('');
     setMaxPrice('');
+    setMinRating('');
   };
 
   const filteredAccomodations = accomodations.filter((acc) => {
     const matchesCity = selectedCity ? acc.city_name === selectedCity : true;
     const matchesMin = minPrice ? acc.price >= Number(minPrice) : true;
     const matchesMax = maxPrice ? acc.price <= Number(maxPrice) : true;
-    return matchesCity && matchesMin && matchesMax;
+    const matchesRating = minRating ? acc.rating >= Number(minRating) : true;
+    return matchesCity && matchesMin && matchesMax && matchesRating;
   });
 
   return (
@@ -114,6 +117,20 @@ const Hotels = () => {
               />
             </div>
 
+            <div className="mb-5">
+              <label className="font-bold block mb-1">Minimum Rating</label>
+              <select
+                value={minRating}
+                onChange={(e) => setMinRating(e.target.value)}
+                className="text-gray-800 w-full p-2 rounded border border-gray-300"
+              >
+                <option value="">Any</option>
+                {[1, 2, 3, 4, 5].map((r) => (
+                  <option key={r} value={r}>{r} stars</option>
+                ))}
+              </select>
+            </div>
+
             <button
               className="mt-4 w-full p-2 bg-red-600 text-white rounded hover:bg-red-700"
               onClick={handleResetFilters}
@@ -125,7 +142,7 @@ const Hotels = () => {
 
         <section className="flex-1">
           <div className="grid justify-center mb-4">
-            <h3 className="text-2xl font-semibold text-center mb-4">
+            <h3 className="text-4xl font-myfont text-center mb-4">
               Available hotels in {countryName}
             </h3>
             <button
@@ -138,7 +155,11 @@ const Hotels = () => {
 
           {loading ? (
             <div className="text-center mt-16 text-lg">Loading hotels...</div>
-          ) : (
+          ) : filteredAccomodations.length === 0 ? (
+              <div className="text-center mt-16 text-lg text-gray-500">
+                No hotels found matching your filters.
+              </div>)
+           : (
             <div className="flex flex-wrap justify-center items-center gap-6">
               {filteredAccomodations.map((acc) => (
                 <div
