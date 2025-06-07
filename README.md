@@ -15,26 +15,28 @@
 
 ## ✅ User Stories
 
-Here are 10–16 user stories implemented in the application:
+Here are the user stories implemented in the application:
 
-| ID   | As a... | I want to...                  | So that...                                |
-| ---- | ------- | ----------------------------- | ----------------------------------------- |
-| US10 | Visitor | View a list of countries      | I can choose where to travel              |
-| US11 | Visitor | View cities within a country  | I can explore travel options              |
-| US12 | Admin   | Add a new country             | Expand the list of available destinations |
-| US13 | Admin   | Edit a city                   | Keep location information accurate        |
-| US14 | Visitor | Search for points of interest | Find activities to do                     |
-| US15 | Admin   | Delete an airport             | Keep airport database up to date          |
-| US16 | Visitor | View airports near a city     | Plan my flight accordingly                |
+| ID   | As a...    | I want to...                                                  | So that...                                                         |
+| ---- | ---------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 1    | Guest      | Create an account                                             | I can use the website with all its features                        |
+| 2    | Guest      | See benefits of creating an account                           | I am motivated to sign up                                          |
+| 3    | Visitor    | Enable dark mode                                              | I have a comfortable browsing experience                           |
+| 4    | User       | Filter vacation recommendations                               | I can refine my search                                             |
+| 5    | User       | View hotels in different countries and cities                 | I can explore accommodation options based on my travel destination |
+| 6    | User       | Log in and log out securely                                   | I can access my saved preferences                                  |
+| 7    | User       | switch the chatbot’s language                                 | I can interact in my preferred language                            |
+| 8    | User       | Receive suggestions from the chatbot                          | I can find the perfect vacation spot                               |
+| 9    | Visitor    | View an interactive map with points of interest               | I can easily discover attractions and restaurants nearby           |
+| 10   | User       | Receive recommendations based on my previous likes            | I can discover places that match my preferences                    |
+| 11   | User       | Save my favorite destinations                                 | I can easily find them later                                       |
+| 12   | Visitor    | View the flying routes from my city to different destinations | I can plan how to reach my desired location                        |
 
 ## 🧩 UML Diagrams
 
 The following UML diagrams were created to better understand and design the architecture:
 
-1. **Class Diagram** - Shows the relationship between `Country`, `City`, `PointsOfInterest`, `Airport`, `User`, etc.
-2. **Use Case Diagram** - Represents user interactions such as creating cities or searching POIs.
-3. **Sequence Diagram** - Demonstrates the flow when a user searches for POIs in a city.
-4. **Activity Diagram** - Describes the process of a user registering and planning a trip.
+1. **Workflow Diagram** - Represents user interactions such as searching hotels, talking to the chatbot or looking for POIs.
 
 _All diagrams are included in the `/diagrams` folder._
 
@@ -47,12 +49,6 @@ _All diagrams are included in the `/diagrams` folder._
 - Pull Requests (PRs) were used for merging into the `main` branch.
 - Code reviews were conducted before merging each PR.
 - Meaningful commit messages and tags were used for tracking.
-
-Example branches:
-
-- `feature/add-countries-api`
-- `feature/poi-validation`
-- `bugfix/fix-airport-association`
 
 ---
 
