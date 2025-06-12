@@ -36,7 +36,7 @@ Here are the user stories implemented in the application:
 
 The following UML diagrams were created to better understand and design the architecture:
 
-![Teste](images/LLM.PNG)
+![Teste](images/LLM.png)
 
 ![Teste](images/miau.jpg)
 
