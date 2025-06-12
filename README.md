@@ -17,31 +17,32 @@
 
 Here are the user stories implemented in the application:
 
-| ID   | As a...    | I want to...                                                  | So that...                                                         |
-| ---- | ---------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
-| 1    | Guest      | Create an account                                             | I can use the website with all its features                        |
-| 2    | Guest      | See benefits of creating an account                           | I am motivated to sign up                                          |
-| 3    | Visitor    | Enable dark mode                                              | I have a comfortable browsing experience                           |
-| 4    | User       | Filter vacation recommendations                               | I can refine my search                                             |
-| 5    | User       | View hotels in different countries and cities                 | I can explore accommodation options based on my travel destination |
-| 6    | User       | Log in and log out securely                                   | I can access my saved preferences                                  |
-| 7    | User       | Switch the chatbot’s language                                 | I can interact in my preferred language                            |
-| 8    | User       | Receive suggestions from the chatbot                          | I can find the perfect vacation spot                               |
-| 9    | Visitor    | View an interactive map with points of interest               | I can easily discover attractions and restaurants nearby           |
-| 10   | User       | Receive recommendations based on my previous likes            | I can discover places that match my preferences                    |
-| 11   | User       | Save my favorite destinations                                 | I can easily find them later                                       |
-| 12   | Visitor    | View the flying routes from my city to different destinations | I can plan how to reach my desired location                        |
+| ID  | As a... | I want to...                                                  | So that...                                                         |
+| --- | ------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 1   | Guest   | Create an account                                             | I can use the website with all its features                        |
+| 2   | Guest   | See benefits of creating an account                           | I am motivated to sign up                                          |
+| 3   | Visitor | Enable dark mode                                              | I have a comfortable browsing experience                           |
+| 4   | User    | Filter vacation recommendations                               | I can refine my search                                             |
+| 5   | User    | View hotels in different countries and cities                 | I can explore accommodation options based on my travel destination |
+| 6   | User    | Log in and log out securely                                   | I can access my saved preferences                                  |
+| 7   | User    | Switch the chatbot’s language                                 | I can interact in my preferred language                            |
+| 8   | User    | Receive suggestions from the chatbot                          | I can find the perfect vacation spot                               |
+| 9   | Visitor | View an interactive map with points of interest               | I can easily discover attractions and restaurants nearby           |
+| 10  | User    | Receive recommendations based on my previous likes            | I can discover places that match my preferences                    |
+| 11  | User    | Save my favorite destinations                                 | I can easily find them later                                       |
+| 12  | Visitor | View the flying routes from my city to different destinations | I can plan how to reach my desired location                        |
 
 ## 🧩 UML Diagrams
 
 The following UML diagrams were created to better understand and design the architecture:
 
-1. **Workflow Diagram** - Represents user interactions such as searching hotels, talking to the chatbot or looking for POIs.
-2. **Use Case Diagram** – Represents the main functionalities of the website and how different types of users interact with them.
+![Teste](images/LLM.PNG)
 
-_All diagrams are included in the `/diagrams` folder._
+![Teste](images/miau.jpg)
 
----
+![Teste](images/userworkflow.jpg)
+
+##
 
 ## 🔀 Source Control & Collaboration
 
@@ -144,7 +145,7 @@ class SessionsController < ApplicationController
 
   private
 
-  # Metodă pentru a genera un token JWT
+  # Metoda pentru a genera un token JWT
   def encode_jwt(user)
     payload = { user_id: user.id }
     JWT.encode(payload, Rails.application.secret_key_base)
