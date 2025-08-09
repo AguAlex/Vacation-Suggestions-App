@@ -38,6 +38,8 @@ The following UML diagrams were created to better understand and design the arch
 
 ![Teste](images/LLM.png)
 
+![Teste](images/Vacation_Agentic_AI_Arh.png)
+
 ![Teste](images/miau.jpg)
 
 ![Teste](images/userworkflow.jpg)
@@ -218,3 +220,4 @@ This multi-agent approach significantly reduced the time required to develop, te
 ```
 
 ```
+
